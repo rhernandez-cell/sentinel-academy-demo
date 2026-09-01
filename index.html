@@ -1,24 +1,176 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SENTINEL Academy · V3</title>
+<!doctype html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>SENTINEL Academy · V3</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#050b14;color:#eef3f8;font-family:Inter,Arial,sans-serif;line-height:1.6}header{min-height:76px;background:#07121f;border-bottom:1px solid #26384e;display:flex;align-items:center;padding:10px 22px;position:sticky;top:0;z-index:20}.logo{height:52px;max-width:290px;object-fit:contain}.brand{margin-left:auto;color:#879aae;font-size:12px;letter-spacing:.08em;text-align:right}.account{display:flex;align-items:center;gap:8px;margin-left:18px}.layout{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 76px)}aside{background:#081321;border-right:1px solid #1d3046;padding:18px;overflow:auto;position:sticky;top:76px;height:calc(100vh - 76px)}.small{font-size:11px;color:#d6b64f;font-weight:900;letter-spacing:.16em}.nav{width:100%;text-align:left;border:0;background:transparent;color:#aab9c9;padding:8px 10px;border-radius:8px;cursor:pointer}.nav.module{font-weight:800;color:#f0f4f8;margin-top:7px}.nav.lesson{font-size:12px;padding-left:22px}.nav.active{background:#14263a;color:#fff;border-left:3px solid #d6b64f}.nav.done{color:#6cdbab}main{max-width:950px;width:100%;margin:auto;padding:38px 28px}.hero{padding:26px;border:1px solid #26384e;border-radius:20px;background:linear-gradient(135deg,#081522,#0d1c2c)}h1{font-size:40px;line-height:1.1;margin:9px 0}h2{font-size:23px;margin:8px 0}h3{font-size:17px}.muted{color:#9aacbe}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}.card{background:#0b1726;border:1px solid #26384e;border-radius:16px;padding:21px}.card.click{cursor:pointer}.card.click:hover{border-color:#a4863c}.progress{height:8px;background:#17293d;border-radius:99px;overflow:hidden;margin:12px 0}.bar{height:100%;background:#d6b64f}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.tag{border:1px solid #3a4d65;border-radius:999px;padding:5px 9px;font-size:12px;color:#c5d1dc}.lesson-top{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.badge{color:#d6b64f;font-size:11px;font-weight:900;letter-spacing:.13em}.box{margin-top:18px;background:#0b1726;border:1px solid #26384e;border-radius:16px;padding:23px}.activity{border-left:3px solid #d6b64f;background:#07111d;padding:15px;margin-top:18px}.error{border-left:3px solid #9aa6b5;background:#0a1421;padding:15px;margin-top:14px;color:#bdc8d2}.ai{border:1px solid #3a4d65;background:#0a1624;border-radius:12px;padding:15px;margin-top:14px;color:#cbd7e2}.actions{display:flex;justify-content:space-between;gap:12px;margin-top:22px}button.cta{border:1px solid #425873;background:#102137;color:white;border-radius:10px;padding:12px 16px;cursor:pointer}button.primary{background:#b9963e;border-color:#b9963e;color:#07111d;font-weight:900}.authbtn{border:1px solid #425873;background:#102137;color:#fff;border-radius:9px;padding:9px 12px;cursor:pointer;font-size:12px}.authbtn.primary{background:#b9963e;color:#07111d;border-color:#b9963e;font-weight:900}.userpill{font-size:12px;color:#d6e0ea;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.final{margin-top:20px;border:1px solid #8c7438;background:#111d2b;border-radius:18px;padding:23px}footer{padding:30px;text-align:center;color:#667b92;font-size:12px}.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}.modal.show{display:flex}.authbox{width:min(430px,100%);background:#0b1726;border:1px solid #334961;border-radius:18px;padding:25px;box-shadow:0 20px 60px rgba(0,0,0,.5)}.authbox h2{margin-top:0}.field{margin:12px 0}.field label{display:block;font-size:12px;color:#9aacbe;margin-bottom:5px}.field input{width:100%;padding:12px;border-radius:9px;border:1px solid #3a4d65;background:#07111d;color:#fff;font-size:15px}.authactions{display:flex;gap:9px;margin-top:18px}.authmsg{margin-top:13px;font-size:13px;color:#cbd7e2}.close{float:right;border:0;background:transparent;color:#9aacbe;font-size:22px;cursor:pointer}@media(max-width:780px){header{padding:10px 14px}.brand{display:none}.account{margin-left:auto}.layout{display:block}aside{display:none}main{padding:20px 14px}h1{font-size:31px}.grid{grid-template-columns:1fr}.userpill{max-width:120px}}
-</style></head><body>
-<header><img class="logo" src="sentinel-logo.png" alt="SENTINEL Academy"><div class="brand">IA APLICADA AL ANÁLISIS DE INTELIGENCIA · V3</div><div class="account" id="account"></div></header>
-<div class="layout"><aside id="side"></aside><main id="main"></main></div><footer>SENTINEL Academy · V3 · Certificado privado de finalización y aprovechamiento</footer>
-<div class="modal" id="authModal"><div class="authbox"><button class="close" onclick="closeAuth()">×</button><div class="small">SENTINEL ACADEMY</div><h2 id="authTitle">Iniciar sesión</h2><p class="muted" id="authSubtitle">Accede a tu formación y conserva tu progreso.</p><div class="field"><label>Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="tu@email.com"></div><div class="field"><label>Contraseña</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Mínimo 6 caracteres"></div><div class="authactions"><button class="authbtn primary" id="authSubmit" onclick="submitAuth()">Iniciar sesión</button><button class="authbtn" onclick="switchAuth()">Crear cuenta</button></div><div class="authmsg" id="authMsg"></div></div></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-const SUPABASE_URL="https://xxtfozgfejjyxtgekcjp.supabase.co";const SUPABASE_KEY="sb_publishable_IVyT9zAxmfmXmzKiP_eQ8Q_S4hQHkAS";const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+*{box-sizing:border-box}body{margin:0;background:#050b14;color:#eef3f8;font-family:Inter,Arial,sans-serif;line-height:1.6}
+
+header{height:76px;background:#07121f;border-bottom:1px solid #26384e;display:flex;align-items:center;padding:10px 22px;position:sticky;top:0;z-index:20}
+
+.logo{height:52px;max-width:290px;object-fit:contain}.brand{margin-left:auto;color:#879aae;font-size:12px;letter-spacing:.08em}
+
+.layout{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 76px)}aside{background:#081321;border-right:1px solid #1d3046;padding:18px;overflow:auto;position:sticky;top:76px;height:calc(100vh - 76px)}
+
+.small{font-size:11px;color:#d6b64f;font-weight:900;letter-spacing:.16em}.nav{width:100%;text-align:left;border:0;background:transparent;color:#aab9c9;padding:8px 10px;border-radius:8px;cursor:pointer}
+
+.nav.module{font-weight:800;color:#f0f4f8;margin-top:7px}.nav.lesson{font-size:12px;padding-left:22px}.nav.active{background:#14263a;color:#fff;border-left:3px solid #d6b64f}.nav.done{color:#6cdbab}
+
+main{max-width:950px;width:100%;margin:auto;padding:38px 28px}.hero{padding:26px;border:1px solid #26384e;border-radius:20px;background:linear-gradient(135deg,#081522,#0d1c2c)}
+
+h1{font-size:40px;line-height:1.1;margin:9px 0}h2{font-size:23px;margin:8px 0}h3{font-size:17px}.muted{color:#9aacbe}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+
+.card{background:#0b1726;border:1px solid #26384e;border-radius:16px;padding:21px}.card.click{cursor:pointer}.card.click:hover{border-color:#a4863c}
+
+.progress{height:8px;background:#17293d;border-radius:99px;overflow:hidden;margin:12px 0}.bar{height:100%;background:#d6b64f}
+
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.tag{border:1px solid #3a4d65;border-radius:999px;padding:5px 9px;font-size:12px;color:#c5d1dc}
+
+.lesson-top{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.badge{color:#d6b64f;font-size:11px;font-weight:900;letter-spacing:.13em}
+
+.box{margin-top:18px;background:#0b1726;border:1px solid #26384e;border-radius:16px;padding:23px}.activity{border-left:3px solid #d6b64f;background:#07111d;padding:15px;margin-top:18px}
+
+.error{border-left:3px solid #9aa6b5;background:#0a1421;padding:15px;margin-top:14px;color:#bdc8d2}.ai{border:1px solid #3a4d65;background:#0a1624;border-radius:12px;padding:15px;margin-top:14px;color:#cbd7e2}
+
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:22px}button.cta{border:1px solid #425873;background:#102137;color:white;border-radius:10px;padding:12px 16px;cursor:pointer}button.primary{background:#b9963e;border-color:#b9963e;color:#07111d;font-weight:900}
+
+.account{margin-left:18px;display:flex;gap:8px;align-items:center}.account button{border:1px solid #425873;background:#102137;color:white;border-radius:9px;padding:8px 11px;cursor:pointer}
+
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}
+
+.authbox{width:min(430px,100%);background:#0b1726;border:1px solid #3a4d65;border-radius:18px;padding:24px;box-shadow:0 20px 70px rgba(0,0,0,.45)}
+
+.authbox input{width:100%;margin:7px 0;padding:12px;border-radius:9px;border:1px solid #425873;background:#07111d;color:#fff}.authbox .row{display:flex;gap:10px;margin-top:12px}.authbox .row button{flex:1}.authmsg{font-size:13px;color:#cbd7e2;margin-top:12px}
+
+.final{margin-top:20px;border:1px solid #8c7438;background:#111d2b;border-radius:18px;padding:23px}footer{padding:30px;text-align:center;color:#667b92;font-size:12px}
+
+@media(max-width:780px){header{padding:10px 14px}.brand{display:none}.layout{display:block}aside{display:none}main{padding:20px 14px}h1{font-size:31px}.grid{grid-template-columns:1fr}.account{margin-left:auto}}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<img class="logo" src="sentinel-logo.png" alt="SENTINEL Academy">
+
+<div class="brand">IA APLICADA AL ANÁLISIS DE INTELIGENCIA · V3</div>
+
+<div id="account" class="account"></div>
+
+</header>
+
+<div class="layout"><aside id="side"></aside><main id="main"></main></div>
+
+<footer>SENTINEL Academy · V3 · Certificado privado de finalización y aprovechamiento</footer>
+
+
+<div class="modal" id="authModal">
+
+<div class="authbox">
+
+<button class="cta" style="float:right" onclick="closeAuth()">✕</button>
+
+<div class="small">SENTINEL ACADEMY</div><h2 id="authTitle">Iniciar sesión</h2>
+
+<p class="muted">Accede para guardar tu progreso.</p>
+
+<input id="authEmail" type="email" placeholder="Email">
+
+<input id="authPassword" type="password" placeholder="Contraseña">
+
+<div class="row"><button class="cta primary" onclick="submitAuth()">Continuar</button><button class="cta" onclick="switchAuth()">Crear cuenta</button></div>
+
+<div id="authMsg" class="authmsg"></div>
+
+</div></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL="https://xxtfozgfejjyxtgekcjp.supabase.co";
+
+const SUPABASE_KEY="sb_publishable_IVyT9zAxmfmXmzKiP_eQ8Q_S4hQHkAS";
+
+const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
 const modules=[{"id":1,"name":"PENSAR","lessons":[{"title":"1.1 Datos, información e inteligencia","content":"Distingue dato, información, análisis e inteligencia.","activity":"Clasifica diez afirmaciones como hechos, inferencias o hipótesis.","error":"No confundas una respuesta fluida con inteligencia."},{"title":"1.2 Necesidad de inteligencia","content":"Convierte peticiones vagas en preguntas operativas definiendo decisor, decisión, horizonte y criterio de éxito.","activity":"Transforma tres peticiones genéricas en necesidades de inteligencia.","error":"No empieces a buscar antes de saber qué pregunta debes responder."},{"title":"1.3 Ciclo de inteligencia","content":"Aplica orientación, obtención, procesamiento, análisis, producción, difusión y retroalimentación.","activity":"Construye el ciclo de un caso ficticio.","error":"Recopilar información no equivale a analizarla."},{"title":"1.4 Hechos, inferencias e hipótesis","content":"Separa lo observado de lo interpretado y de las explicaciones que deben contrastarse.","activity":"Reescribe un párrafo confuso manteniendo la trazabilidad.","error":"Nunca presentes una hipótesis como un hecho."},{"title":"1.5 Sesgos y pensamiento estructurado","content":"Reconoce confirmación, anclaje, disponibilidad y exceso de confianza.","activity":"Intenta refutar una conclusión propia con una explicación alternativa.","error":"No busques únicamente evidencia que confirme tu primera impresión."},{"title":"1.6 Incertidumbre y confianza","content":"Expresa conclusiones proporcionales a la evidencia y explica qué podría cambiar la confianza.","activity":"Redacta valoraciones con confianza baja, moderada y alta.","error":"Evita falsa precisión."}]},{"id":2,"name":"INVESTIGAR","lessons":[{"title":"2.1 Diseñar una investigación","content":"Define objetivo, alcance, fecha de corte, entidades, preguntas y registro de evidencias.","activity":"Crea un plan OSINT reproducible de una página.","error":"No acumules enlaces sin criterio de parada."},{"title":"2.2 Arquitectura de búsqueda","content":"Construye búsquedas progresivas con términos, frases exactas, dominios, fechas e idiomas.","activity":"Documenta diez consultas y qué incertidumbre reduce cada una.","error":"No dependas de una única consulta."},{"title":"2.3 Evaluar una fuente","content":"Valora autoridad, proximidad, actualidad, interés, independencia, consistencia y trazabilidad.","activity":"Evalúa cinco fuentes y separa calidad de fuente y afirmación.","error":"Popularidad no significa fiabilidad."},{"title":"2.4 Corroboración e independencia","content":"Distingue corroboración real de repetición y compara origen, fecha y atribución.","activity":"Construye una cadena de corroboración.","error":"Varias páginas pueden repetir la misma fuente original."},{"title":"2.5 Cronologías y actores","content":"Ordena acontecimientos y vincula actores solo cuando exista evidencia.","activity":"Construye una cronología y un mapa básico de actores.","error":"Proximidad temporal no demuestra causalidad."},{"title":"2.6 Información engañosa y verificación","content":"Detecta contexto perdido, atribuciones débiles, material reutilizado y afirmaciones sin respaldo.","activity":"Clasifica afirmaciones como confirmadas, parcialmente confirmadas, no confirmadas o refutadas.","error":"No confirmado no significa automáticamente falso."}]},{"id":3,"name":"POTENCIAR","lessons":[{"title":"3.1 Modelo mental de la IA","content":"Comprende la IA generativa como herramienta de apoyo rápida pero capaz de producir errores.","activity":"Divide una investigación en tareas donde la IA ayuda y tareas que requieren validación.","error":"Una respuesta convincente no es una fuente."},{"title":"3.2 Extracción estructurada","content":"Extrae entidades, fechas, afirmaciones y relaciones conservando el origen.","activity":"Convierte un documento ficticio en una tabla de evidencias.","error":"Revisa siempre el documento original."},{"title":"3.3 Comparación de documentos","content":"Usa IA para detectar coincidencias, cambios y contradicciones entre versiones.","activity":"Compara dos documentos y verifica cada diferencia relevante.","error":"Una diferencia textual no siempre es una diferencia analítica."},{"title":"3.4 IA para hipótesis","content":"Genera explicaciones alternativas sin convertir posibilidades en hechos.","activity":"Construye una matriz de hipótesis y evidencias.","error":"No pidas a la IA que decida responsabilidades."},{"title":"3.5 Prompt Maestro SENTINEL","content":"Construye prompts con objetivo, contexto, corpus, límites, criterios, formato y revisión.","activity":"Transforma un prompt genérico en un Prompt Maestro.","error":"Un prompt vago produce resultados difíciles de auditar."},{"title":"3.6 Revisión adversarial","content":"Utiliza IA para buscar hechos sin fuente, contradicciones y saltos inferenciales.","activity":"Audita un brief defectuoso y corrígelo.","error":"No uses la misma salida como única comprobación."},{"title":"3.7 Flujo SENTINEL de IA","content":"Integra preparar corpus, extraer, comparar, generar alternativas, analizar, redactar, auditar y verificar.","activity":"Ejecuta un mini-flujo completo y registra dónde intervino la IA.","error":"La IA acelera tareas; el analista conserva el criterio."}]},{"id":4,"name":"ANALIZAR","lessons":[{"title":"4.1 Análisis de actores","content":"Identifica intereses, capacidades, dependencias, incentivos y restricciones sin atribuir intenciones por asociación.","activity":"Construye una matriz de actores con evidencia y confianza.","error":"Una relación comercial no demuestra coordinación."},{"title":"4.2 Hipótesis competidoras","content":"Compara explicaciones alternativas mediante evidencias a favor, en contra y neutrales.","activity":"Actualiza una matriz de hipótesis tras nueva evidencia.","error":"No crees hipótesis alternativas artificialmente débiles."},{"title":"4.3 Valoración y confianza","content":"Redacta conclusiones calibradas y explica respaldo, lagunas y condiciones de cambio.","activity":"Convierte conclusiones absolutas en valoraciones defendibles.","error":"Confianza no equivale a probabilidad matemática."},{"title":"4.4 Riesgo","content":"Define evento, probabilidad cualitativa, impacto, horizonte, indicadores y mitigaciones.","activity":"Crea una matriz de riesgos priorizada.","error":"Evita falsa precisión numérica."},{"title":"4.5 Indicadores y alertas","content":"Diseña señales observables que aumenten o reduzcan la confianza en una hipótesis o riesgo.","activity":"Define cinco indicadores y qué cambio activaría una revisión.","error":"Un indicador debe tener relación razonable con la hipótesis."},{"title":"4.6 Escenarios","content":"Construye escenarios base, alternativo y adverso y define señales tempranas.","activity":"Redacta tres escenarios y sus indicadores.","error":"Un escenario no es una predicción inevitable."}]},{"id":5,"name":"INFORMAR","lessons":[{"title":"5.1 Escribir para decidir","content":"Responde primero a la necesidad del destinatario; el análisis debe apoyar la valoración.","activity":"Reduce dos páginas de análisis a un párrafo útil para un decisor.","error":"No escondas la conclusión detrás de metodología."},{"title":"5.2 Arquitectura del Brief","content":"Integra resumen ejecutivo, valoración, hechos, análisis, hipótesis, riesgos, indicadores, recomendaciones, confianza y fuentes.","activity":"Ordena un brief desestructurado.","error":"No mezcles hechos y recomendaciones sin transición."},{"title":"5.3 Lenguaje calibrado","content":"Diferencia expresiones como se observa, es consistente con, sugiere y se estima.","activity":"Edita diez frases para hacerlas proporcionales a la evidencia.","error":"Evita dramatización y absolutos."},{"title":"5.4 Visualización y trazabilidad","content":"Usa tablas, cronologías y esquemas cuando reduzcan carga cognitiva y conserva su origen.","activity":"Decide qué debe presentarse como texto, tabla o cronología.","error":"No diseñes para decorar; diseña para comprender."},{"title":"5.5 Brief defectuoso vs SENTINEL","content":"Detecta fuentes ausentes, inferencias, contradicciones, exceso de certeza y recomendaciones débiles.","activity":"Corrige un brief defectuoso y explica cinco cambios.","error":"Mejorar estilo no arregla un razonamiento deficiente."},{"title":"5.6 Control final","content":"Audita pregunta, fechas, nombres, cifras, fuentes, inferencias, contradicciones, confianza y recomendaciones.","activity":"Aplica la checklist final antes de entregar.","error":"Revisar ortografía no es revisar el análisis."}]},{"id":6,"name":"DECIDIR","lessons":[{"title":"6.1 Briefing de misión","content":"NOVA Systems, empresa ficticia, detecta cambios simultáneos en proveedores, dirección, actividad comercial y presencia digital.","activity":"Formula necesidad de inteligencia y tres preguntas prioritarias.","error":"No saltes directamente a una explicación."},{"title":"6.2 Expediente y evidencia","content":"Trabaja con un expediente ficticio de 15 piezas con señales, ruido y contradicciones.","activity":"Crea el registro de evidencias y evalúa cada pieza.","error":"No todas las piezas tienen el mismo valor probatorio."},{"title":"6.3 Investigación","content":"Construye consultas, registra fuentes y completa cronología y actores usando el corpus autorizado.","activity":"Entrega registro OSINT y mapa de actores.","error":"No introduzcas hechos externos como si fueran parte del expediente."},{"title":"6.4 Análisis","content":"Formula al menos tres hipótesis, identifica contradicciones y construye matriz de riesgos e indicadores.","activity":"Entrega hipótesis, riesgos, indicadores y confianza.","error":"No elijas hipótesis demasiado pronto."},{"title":"6.5 Producto","content":"Redacta un Intelligence Brief de una página más anexo de trazabilidad.","activity":"Entrega producto final con fuentes, confianza y limitaciones.","error":"Un informe largo que no responde al decisor no es un buen producto."},{"title":"6.6 Evaluación y reevaluación","content":"Defiende la valoración y actualízala ante nueva evidencia. Rúbrica: problema 15%, fuentes 20%, análisis 25%, riesgos 15%, producto 15%, rigor 10%. Umbral recomendado 70/100. El certificado es privado y no constituye titulación oficial ni homologación pública.","activity":"Registra qué cambió tras la actualización y por qué.","error":"Mantener la conclusión inicial por coherencia narrativa es un error."}]}];const lessons=modules.flatMap(m=>m.lessons.map((l,i)=>({...l,module:m.id,moduleName:m.name,number:i+1})));
-let current=localStorage.getItem("sentinel_v3_current")||"home",currentUser=null,authMode="login",done=[];
-function progressKey(){return currentUser?"sentinel_v3_done_"+currentUser.id:"sentinel_v3_done_guest"}function loadDone(){try{done=JSON.parse(localStorage.getItem(progressKey())||"[]")}catch(e){done=[]}}function save(){localStorage.setItem("sentinel_v3_current",current);localStorage.setItem(progressKey(),JSON.stringify(done))}function go(x){current=x;save();render();scrollTo(0,0)}function pct(){return Math.round(done.length/lessons.length*100)}function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
-function renderAccount(){const e=document.getElementById("account");if(currentUser)e.innerHTML=`<span class="userpill">${esc(currentUser.email||"Alumno")}</span><button class="authbtn" onclick="logout()">Cerrar sesión</button>`;else e.innerHTML=`<button class="authbtn" onclick="openAuth('login')">Iniciar sesión</button><button class="authbtn primary" onclick="openAuth('signup')">Crear cuenta</button>`}
-function renderSide(){let s='<div class="small">PROGRAMA · 37 LECCIONES</div><button class="nav module" onclick="go('home')">⌂ Dashboard</button>';modules.forEach(m=>{s+=`<button class="nav module" onclick="go('M${m.id}')">M${m.id} · ${m.name}</button>`;m.lessons.forEach((l,i)=>{let id=`m${m.id}l${i+1}`;s+=`<button class="nav lesson ${current===id?'active ':''}${done.includes(id)?'done':''}" onclick="go('${id}')">${done.includes(id)?'✓ ':''}${esc(l.title)}</button>`})});document.getElementById('side').innerHTML=s}
-function home(){document.getElementById('main').innerHTML=`<div class="hero"><div class="small">SENTINEL ACADEMY · V3</div><h1>IA aplicada al Análisis de Inteligencia</h1><p class="muted">Recorrido completo: pensar, investigar, potenciar con IA, analizar, informar y decidir.</p><div class="tags"><span class="tag">37 lecciones</span><span class="tag">30–40 h estimadas</span><span class="tag">OSINT</span><span class="tag">IA</span><span class="tag">Intelligence Brief</span><span class="tag">Operación SENTINEL</span></div></div><div class="card" style="margin-top:18px"><b>Progreso del curso · ${pct()}%</b><div class="progress"><div class="bar" style="width:${pct()}%"></div></div><span class="muted">${done.length} / ${lessons.length} lecciones completadas</span></div><div class="grid">${modules.map(m=>`<div class="card click" onclick="go('M${m.id}')"><div class="small">MÓDULO ${m.id}</div><h2>${m.name}</h2><p class="muted">${m.lessons.length} lecciones</p></div>`).join('')}</div><div class="final"><b style="color:#dfc15a">Objetivo final</b><p>Aplicar el método completo en Operación SENTINEL — Horizonte Norte y producir un Intelligence Brief trazable y defendible.</p></div>`}
-function mod(n){let m=modules.find(x=>x.id===n);document.getElementById('main').innerHTML=`<div class="small">MÓDULO ${m.id}</div><h1>${m.name}</h1><p class="muted">Selecciona una lección. Cada lección combina concepto, aplicación, actividad y revisión.</p><div class="grid">${m.lessons.map((l,i)=>{let id=`m${m.id}l${i+1}`;return `<div class="card click" onclick="go('${id}')"><div class="small">${done.includes(id)?'✓ COMPLETADA':'LECCIÓN '+(i+1)}</div><h2>${esc(l.title.replace(/^\d+\.\d+\s+/,''))}</h2><p class="muted">${esc(l.content.slice(0,150))}…</p></div>`}).join('')}</div>`}
-function lesson(id){let i=lessons.findIndex(x=>`m${x.module}l${x.number}`===id),l=lessons[i],prev=lessons[i-1],next=lessons[i+1];document.getElementById('main').innerHTML=`<div class="lesson-top"><div><div class="small">MÓDULO ${l.module} · LECCIÓN ${l.number}</div><h1>${esc(l.title)}</h1><p class="muted">${esc(l.moduleName)}</p></div><div class="badge">${done.includes(id)?'COMPLETADA':'EN CURSO'}</div></div><div class="box"><h3>Concepto</h3><p>${esc(l.content)}</p><div class="ai"><b>🤖 IA SENTINEL</b><p>Utiliza la IA para estructurar, contrastar o auditar el material suministrado, sin inventar hechos y manteniendo trazabilidad.</p></div><div class="activity"><b>Actividad práctica</b><p>${esc(l.activity)}</p></div><div class="error"><b>Error a evitar</b><p>${esc(l.error)}</p></div></div><div class="actions"><button class="cta" onclick="go('${prev?`m${prev.module}l${prev.number}`:'home'}')">← Anterior</button><button class="cta primary" onclick="complete()">${done.includes(id)?(next?'Siguiente →':'Volver al inicio'):'Marcar completada ✓'}</button></div>`}
-function complete(){if(!currentUser){openAuth('login');setAuthMsg('Inicia sesión para guardar tu progreso asociado a tu cuenta.');return}let i=lessons.findIndex(x=>`m${x.module}l${x.number}`===current);if(!done.includes(current))done.push(current);current=lessons[i+1]?`m${lessons[i+1].module}l${lessons[i+1].number}`:'home';save();render();scrollTo(0,0)}
-function render(){renderAccount();renderSide();if(current==='home')home();else if(current[0]==='M')mod(Number(current.slice(1)));else lesson(current)}
-function openAuth(mode){authMode=mode||'login';document.getElementById('authModal').classList.add('show');document.getElementById('authTitle').textContent=authMode==='signup'?'Crear cuenta':'Iniciar sesión';document.getElementById('authSubtitle').textContent=authMode==='signup'?'Crea tu cuenta para acceder a SENTINEL Academy.':'Accede a tu formación y conserva tu progreso.';document.getElementById('authSubmit').textContent=authMode==='signup'?'Crear cuenta':'Iniciar sesión';setAuthMsg('')}function closeAuth(){document.getElementById('authModal').classList.remove('show')}function switchAuth(){openAuth(authMode==='login'?'signup':'login')}function setAuthMsg(m){document.getElementById('authMsg').textContent=m||''}
-async function submitAuth(){const email=document.getElementById('authEmail').value.trim(),password=document.getElementById('authPassword').value;if(!email||!password){setAuthMsg('Introduce email y contraseña.');return}if(password.length<6){setAuthMsg('La contraseña debe tener al menos 6 caracteres.');return}const b=document.getElementById('authSubmit');b.disabled=true;setAuthMsg('Procesando…');try{if(authMode==='signup'){const {data,error}=await supabaseClient.auth.signUp({email,password});if(error)throw error;if(data.session){currentUser=data.user;loadDone();closeAuth();render()}else setAuthMsg('Cuenta creada. Revisa tu correo para confirmar la dirección y después inicia sesión.')}else{const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;currentUser=data.user;loadDone();closeAuth();render()}}catch(e){setAuthMsg(e.message||'No se pudo completar la operación.')}finally{b.disabled=false}}
-async function logout(){await supabaseClient.auth.signOut();currentUser=null;loadDone();render()}
-async function initAuth(){const {data}=await supabaseClient.auth.getSession();currentUser=data.session?.user||null;loadDone();render();supabaseClient.auth.onAuthStateChange((_event,session)=>{currentUser=session?.user||null;loadDone();render()})}initAuth();
-</script></body></html>
+
+const lessons=modules.flatMap(m=>m.lessons.map((l,i)=>({...l,module:m.id,moduleName:m.name,number:i+1})));
+
+let current=localStorage.getItem("sentinel_v3_current")||"home",currentUser=null,done=[];
+
+function loadLocalDone(){try{done=JSON.parse(localStorage.getItem(currentUser?"sentinel_v3_done_"+currentUser.id:"sentinel_v3_done_guest")||"[]")}catch(e){done=[]}}
+
+function save(){localStorage.setItem("sentinel_v3_current",current);localStorage.setItem(currentUser?"sentinel_v3_done_"+currentUser.id:"sentinel_v3_done_guest",JSON.stringify(done))}
+
+function pct(){return lessons.length?Math.round(done.length/lessons.length*100):0}
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+function go(x){current=x;save();render();scrollTo(0,0)}
+
+function renderAccount(){
+
+const e=document.getElementById("account");
+
+if(currentUser)e.innerHTML="<span class='muted'>"+esc(currentUser.email||"Alumno")+"</span><button onclick='logout()'>Salir</button>";
+
+else e.innerHTML="<button onclick='openAuth(\"login\")'>Iniciar sesión</button>";
+
+}
+
+function renderSide(){
+
+let s="<div class='small'>PROGRAMA · 37 LECCIONES</div><button class='nav module' onclick=\"go('home')\">⌂ Dashboard</button>";
+
+modules.forEach(m=>{s+="<button class='nav module' onclick=\"go('M"+m.id+"')\">M"+m.id+" · "+esc(m.name)+"</button>";
+
+m.lessons.forEach((l,i)=>{let id="m"+m.id+"l"+(i+1);s+="<button class='nav lesson "+(current===id?"active ":"")+(done.includes(id)?"done":"")+"' onclick=\"go('"+id+"')\">"+(done.includes(id)?"✓ ":"")+esc(l.title)+"</button>"})});
+
+document.getElementById("side").innerHTML=s}
+
+function home(){document.getElementById("main").innerHTML="<div class='hero'><div class='small'>SENTINEL ACADEMY · V3</div><h1>IA aplicada al Análisis de Inteligencia</h1><p class='muted'>Recorrido completo: pensar, investigar, potenciar con IA, analizar, informar y decidir.</p><div class='tags'><span class='tag'>37 lecciones</span><span class='tag'>30–40 h estimadas</span><span class='tag'>OSINT</span><span class='tag'>IA</span><span class='tag'>Intelligence Brief</span><span class='tag'>Operación SENTINEL</span></div></div><div class='card' style='margin-top:18px'><b>Progreso del curso · "+pct()+"%</b><div class='progress'><div class='bar' style='width:"+pct()+"%'></div></div><span class='muted'>"+done.length+" / "+lessons.length+" lecciones completadas</span></div><div class='grid'>"+modules.map(m=>"<div class='card click' onclick=\"go('M"+m.id+"')\"><div class='small'>MÓDULO "+m.id+"</div><h2>"+esc(m.name)+"</h2><p class='muted'>"+m.lessons.length+" lecciones</p></div>").join("")+"</div><div class='final'><b style='color:#dfc15a'>Objetivo final</b><p>Aplicar el método completo en Operación SENTINEL — Horizonte Norte y producir un Intelligence Brief trazable y defendible.</p></div>"}
+
+function mod(n){let m=modules.find(x=>x.id===n);if(!m){go("home");return}document.getElementById("main").innerHTML="<div class='small'>MÓDULO "+m.id+"</div><h1>"+esc(m.name)+"</h1><p class='muted'>Selecciona una lección. Cada lección combina concepto, aplicación, actividad y revisión.</p><div class='grid'>"+m.lessons.map((l,i)=>{let id="m"+m.id+"l"+(i+1);return "<div class='card click' onclick=\"go('"+id+"')\"><div class='small'>"+(done.includes(id)?"✓ COMPLETADA":"LECCIÓN "+(i+1))+"</div><h2>"+esc(l.title.replace(/^\d+\.\d+\s+/,""))+"</h2><p class='muted'>"+esc(l.content.slice(0,150))+"…</p></div>"}).join("")+"</div>"}
+
+function lesson(id){let i=lessons.findIndex(x=>"m"+x.module+"l"+x.number===id);if(i<0){go("home");return}let l=lessons[i],prev=lessons[i-1],next=lessons[i+1];document.getElementById("main").innerHTML="<div class='lesson-top'><div><div class='small'>MÓDULO "+l.module+" · LECCIÓN "+l.number+"</div><h1>"+esc(l.title)+"</h1><p class='muted'>"+esc(l.moduleName)+"</p></div><div class='badge'>"+(done.includes(id)?"COMPLETADA":"EN CURSO")+"</div></div><div class='box'><h3>Concepto</h3><p>"+esc(l.content)+"</p><div class='ai'><b>🤖 IA SENTINEL</b><p>"+esc(l.ia||"Utiliza la IA para estructurar, contrastar o auditar el material suministrado, sin inventar hechos y manteniendo trazabilidad.")+"</p></div><div class='activity'><b>Actividad práctica</b><p>"+esc(l.activity)+"</p></div><div class='error'><b>Error a evitar</b><p>"+esc(l.error)+"</p></div></div><div class='actions'><button class='cta' onclick=\"go('"+(prev?"m"+prev.module+"l"+prev.number:"home")+"\")\">← Anterior</button><button class='cta primary' onclick='complete()'>"+(done.includes(id)?(next?"Siguiente →":"Volver al inicio"):"Marcar completada ✓")+"</button></div>"}
+
+function complete(){if(!currentUser){openAuth("login");document.getElementById("authMsg").textContent="Inicia sesión para guardar el progreso asociado a tu cuenta.";return}let i=lessons.findIndex(x=>"m"+x.module+"l"+x.number===current);if(!done.includes(current))done.push(current);current=lessons[i+1]?"m"+lessons[i+1].module+"l"+lessons[i+1].number:"home";save();render();scrollTo(0,0)}
+
+let authMode="login";
+
+function openAuth(mode){authMode=mode||"login";document.getElementById("authTitle").textContent=authMode==="login"?"Iniciar sesión":"Crear cuenta";document.getElementById("authMsg").textContent="";document.getElementById("authModal").classList.add("show")}
+
+function closeAuth(){document.getElementById("authModal").classList.remove("show")}
+
+function switchAuth(){openAuth(authMode==="login"?"signup":"login")}
+
+async function submitAuth(){const email=document.getElementById("authEmail").value.trim(),password=document.getElementById("authPassword").value,msg=document.getElementById("authMsg");msg.textContent="Procesando…";try{let r=authMode==="login"?await supabaseClient.auth.signInWithPassword({email,password}):await supabaseClient.auth.signUp({email,password});if(r.error)throw r.error;currentUser=r.data.user||null;loadLocalDone();render();if(currentUser){msg.textContent=authMode==="signup"?"Cuenta creada. Si se solicita confirmación, revisa tu email.":"Sesión iniciada correctamente.";setTimeout(closeAuth,900)}else msg.textContent="Revisa tu email para confirmar la cuenta."}catch(e){msg.textContent=e.message||"No se pudo completar la operación."}}
+
+async function logout(){await supabaseClient.auth.signOut();currentUser=null;done=[];render()}
+
+async function initAuth(){const r=await supabaseClient.auth.getSession();currentUser=r.data.session?.user||null;loadLocalDone();render();supabaseClient.auth.onAuthStateChange((_event,session)=>{currentUser=session?.user||null;loadLocalDone();render()})}
+
+function render(){renderAccount();renderSide();if(current==="home")home();else if(current[0]==="M")mod(Number(current.slice(1)));else lesson(current)}
+
+initAuth();
+
+</script>
+
+</body>
+
+</html>
+
