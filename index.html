@@ -110,7 +110,7 @@ footer{padding:28px;text-align:center;color:#667b92;font-size:12px}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="https://xxtfozgfejjyxtgekcjp.supabase.co";
-const SUPABASE_KEY="sb_publishable_IVyT9zAxmfmXmzKiP_eQ8Q_S4hQHkAS"
+const SUPABASE_KEY="sb_publishable_IVyT9ZAxmfmXmZKiP_eQ8Q_S4hQHKAS";
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
 let user=null, course=null, modules=[], lessons=[], current="home", currentLesson=null;
@@ -181,12 +181,28 @@ async function home(){
     <h1>IA aplicada al<br>Análisis de Inteligencia</h1>
     <p class="muted">Programa privado de formación en inteligencia, OSINT, análisis estructurado, riesgos e IA como copiloto del analista.</p>
     <div class="tags"><span class="tag">6 módulos</span><span class="tag">${lessons.length||36} lecciones</span><span class="tag">Cuestionarios</span><span class="tag">Operación SENTINEL</span></div>
-    ${user&&enrolled?`<div class="card" style="margin-top:20px"><b>Tu progreso</b><div class="progress"><span style="width:${pct}%"></span></div><div class="muted">${lessonProgress.size}/${lessons.length} lecciones completadas · ${pct}%</div></div>`:
-    `<div style="margin-top:20px"><button class="btn primary" onclick="openAuth('login')">Acceder a la academia</button></div>`}
+    ${user&&enrolled?`<div class="card" style="margin-top:20px"><b>Tu progreso</b><div class="progress"><span style="width:${pct}%"></span></div><div class="muted">${lessonProgress.size}/${lessons.length} lecciones completadas · ${pct}%</div><button class="btn primary" style="margin-top:14px" onclick="accessAcademy()">Entrar en la academia</button></div>`:
+    `<div style="margin-top:20px"><button class="btn primary" onclick="accessAcademy()">Acceder a la academia</button></div>`}
   </section>
   <div class="grid">
     ${modules.map(m=>`<div class="card click" onclick="go('M${m.id}')"><div class="eyebrow">MÓDULO ${m.module_number}</div><h2>${esc(m.title)}</h2><p class="muted">${lessons.filter(l=>l.module_id===m.id).length} lecciones con evaluación práctica.</p></div>`).join("")}
   </div>`;
+}
+
+async function accessAcademy(){
+  if(!user){openAuth("login");return}
+  const enrolled=await loadEnrollment();
+  if(!enrolled){
+    document.getElementById("main").innerHTML=`<div class="lessonbox"><div class="eyebrow">ACCESO</div><h1>Academia</h1><div class="status bad">No se ha encontrado una matrícula activa para esta cuenta.</div><p class="muted">Si acabas de crear o activar tu matrícula, vuelve a cargar la página.</p><button class="btn" style="margin-top:12px" onclick="refresh()">Actualizar</button></div>`;
+    return;
+  }
+  if(enrolled.status!=="active"){
+    document.getElementById("main").innerHTML=`<div class="lessonbox"><div class="eyebrow">ACCESO</div><h1>Matrícula pendiente</h1><div class="status bad">Tu matrícula no está activa todavía.</div></div>`;
+    return;
+  }
+  await loadProgress();
+  side();
+  go("M1");
 }
 
 function modulePage(id){
