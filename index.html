@@ -1,72 +1,433 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SENTINEL Academy · IA para Inteligencia</title><style>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SENTINEL Academy · IA para Inteligencia</title>
+<style>
+*{box-sizing:border-box}
+:root{--navy:#071321;--navy2:#0c1b2c;--gold:#d3ad43;--gold2:#e7ca72;--text:#eef4f8;--muted:#9dafc1;--line:#2a3d54;--ok:#4bd493;--bad:#f07c7c}
+body{margin:0;background:#050b14;color:var(--text);font:15px/1.55 Arial,Inter,sans-serif}
+button,input{font:inherit}button{cursor:pointer}
+.top{height:76px;position:sticky;top:0;z-index:50;background:var(--navy);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:9px 20px;gap:15px}
+.logo-frame{height:58px;width:300px;max-width:57vw;display:flex;align-items:center;overflow:hidden}
+.logo{width:100%;height:100%;object-fit:contain;object-position:left center}
+.brand{margin-left:auto;color:#a8b8c8;font-size:10px;letter-spacing:.12em;text-align:right}
+.account{display:flex;gap:8px;align-items:center}
+.btn{border:1px solid #486079;background:#102137;color:#fff;border-radius:10px;padding:10px 14px}
+.primary{background:var(--gold);border-color:var(--gold);color:#071321;font-weight:800}
+.danger{border-color:#784444}
+.shell{display:grid;grid-template-columns:275px 1fr;min-height:calc(100vh - 76px)}
+aside{background:#081321;border-right:1px solid var(--line);padding:17px;position:sticky;top:76px;height:calc(100vh - 76px);overflow:auto}
+.navtitle,.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--gold);font-weight:900}
+.navbtn{display:block;width:100%;text-align:left;border:0;background:transparent;color:#b9c7d4;padding:9px 10px;border-radius:8px;margin-top:4px}
+.navbtn:hover,.navbtn.active{background:#14283e;color:#fff}
+.navbtn.mod{font-weight:800;color:#f1f5f8;margin-top:9px}.navbtn.lesson{font-size:12px;padding-left:22px}
+main{max-width:1100px;width:100%;margin:auto;padding:30px 24px}
+.hero{background:radial-gradient(circle at 90% 0,rgba(211,173,67,.14),transparent 30%),linear-gradient(135deg,#081522,#0e1e30);border:1px solid var(--line);border-radius:22px;padding:32px}
+h1{font-size:40px;line-height:1.12;margin:8px 0}h2{font-size:25px;margin:8px 0}h3{font-size:18px}.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:18px}
+.card,.lessonbox,.legal{background:var(--navy2);border:1px solid var(--line);border-radius:16px;padding:20px}
+.click{cursor:pointer}.click:hover{border-color:#a38332}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}.tag{border:1px solid #40536a;border-radius:999px;padding:4px 9px;font-size:12px;color:#cad5df}
+.progress{height:9px;background:#17293d;border-radius:99px;overflow:hidden;margin:12px 0}.progress span{display:block;height:100%;background:var(--gold)}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+.lessonhead{display:flex;justify-content:space-between;gap:15px}.callout{margin-top:17px;border-left:3px solid var(--gold);background:#07111d;padding:14px}
+.quiz{margin-top:20px}.q{padding:16px;border:1px solid var(--line);border-radius:13px;background:#081522;margin:12px 0}.option{display:block;padding:9px;border:1px solid transparent;border-radius:8px;margin:5px 0}.option:hover{background:#102238;border-color:#304962}
+.status{margin-top:12px;padding:11px;border:1px solid var(--line);border-radius:9px}.ok{border-color:#277a58;color:#8ee3b9}.bad{border-color:#7c3d3d;color:#ffabab}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:100;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}
+.modalbox{width:min(480px,100%);background:#0b1726;border:1px solid #40536a;border-radius:18px;padding:23px}
+.field{width:100%;margin:7px 0;padding:12px;border:1px solid #425873;border-radius:9px;background:#07111d;color:#fff}
+.small{font-size:12px}.hidden{display:none!important}
+.certwrap{overflow:auto;background:#071321;padding:18px;border-radius:18px}
+.cert{width:1123px;height:794px;margin:auto;position:relative;background:#f7f4ec;color:#071321;border:3px solid var(--gold);overflow:hidden}
+.cert:before{content:"";position:absolute;inset:16px;border:1px solid var(--gold)}
+.certLogo{position:absolute;top:22px;left:0;right:0;height:100px;display:flex;justify-content:center;align-items:center}.certLogo img{width:300px;height:92px;object-fit:contain}
+.cert h1{position:absolute;top:145px;left:0;right:0;text-align:center;font-size:25px}.cert .award{position:absolute;top:193px;left:0;right:0;text-align:center}
+.cert .name{position:absolute;top:216px;left:40px;right:40px;text-align:center;font:italic 46px Georgia,serif}
+.cert .course{position:absolute;top:300px;left:0;right:0;text-align:center;font-size:29px;font-weight:900}.cert .sub{position:absolute;top:342px;left:0;right:0;text-align:center;font-size:17px;font-weight:800}
+.cert .meta{position:absolute;top:399px;left:85px;right:85px;display:flex;justify-content:space-around;text-align:center;font-size:11px}.cert .meta div{width:25%;padding:0 10px;border-right:1px solid var(--gold)}.cert .meta div:last-child{border-right:0}.cert .meta b{display:block;margin-top:6px}
+.cert .body{position:absolute;top:474px;left:125px;right:125px;text-align:center;font-size:13px;line-height:1.45}.sign{position:absolute;bottom:80px;width:220px;text-align:center;border-top:1px solid #9b7d32;padding-top:7px;font-size:10px}.sl{left:145px}.sr{right:145px}
+.seal{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);width:78px;height:78px;border-radius:50%;background:#071321;border:7px solid var(--gold);color:var(--gold);text-align:center;line-height:64px;font-size:27px;font-weight:900}
+.cert .footer{position:absolute;bottom:0;left:0;right:0;height:48px;background:#071321;color:#fff;padding:0 38px;display:flex;align-items:center;justify-content:space-between;font-size:9px}
+footer{padding:28px;text-align:center;color:#667b92;font-size:12px}
+.cookie{position:fixed;left:15px;right:15px;bottom:15px;z-index:80;background:#0b1726;border:1px solid #3a4d65;border-radius:14px;padding:14px;display:none;align-items:center;gap:15px;justify-content:space-between}.cookie.show{display:flex}
+@media(max-width:800px){.logo-frame{width:220px;height:54px;max-width:60vw}.brand{display:none}.shell{display:block}aside{display:none}main{padding:18px 13px}h1{font-size:31px}.grid{grid-template-columns:1fr}.actions{flex-direction:column}.actions .btn{width:100%}}
+@media print{.top,aside,footer,.no-print{display:none!important}main{max-width:none;padding:0}.certwrap{padding:0;background:#fff}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="logo-frame"><img class="logo" src="sentinel-logo.png" alt="SENTINEL Academy"></div>
+  <div class="brand">IA PARA INTELIGENCIA · OSINT · ANÁLISIS · RIESGOS</div>
+  <div id="account" class="account"></div>
+</header>
 
-*{box-sizing:border-box}:root{--n:#071321;--n2:#0b1726;--g:#d3ad43;--g2:#e6c766;--t:#edf3f8;--m:#9badc0;--l:#26384e;--ok:#45c98a}body{margin:0;background:#050b14;color:var(--t);font:15px/1.55 Inter,Arial,sans-serif}button,input{font:inherit}button{cursor:pointer}.top{height:76px;position:sticky;top:0;z-index:50;background:#071321;border-bottom:1px solid var(--l);display:flex;align-items:center;padding:10px 22px;gap:16px}.logo-frame{height:58px;width:300px;max-width:55vw;display:flex;align-items:center;overflow:hidden;border-radius:8px;background:#071321}.logo{width:100%;height:100%;object-fit:contain;object-position:left center;display:block}.brand{margin-left:auto;font-size:11px;letter-spacing:.12em;color:#9aaabd;text-align:right}.account{display:flex;gap:8px;align-items:center}.btn{border:1px solid #425873;background:#102137;color:#fff;border-radius:10px;padding:11px 15px}.primary{background:var(--g);border-color:var(--g);color:#071321;font-weight:800}.shell{display:grid;grid-template-columns:285px 1fr;min-height:calc(100vh - 76px)}aside{background:#081321;border-right:1px solid var(--l);padding:18px;position:sticky;top:76px;height:calc(100vh - 76px);overflow:auto}.navtitle,.eyebrow{font-size:11px;letter-spacing:.15em;color:var(--g);font-weight:900}.navbtn{display:block;width:100%;text-align:left;border:0;background:transparent;color:#b6c4d2;padding:9px 10px;border-radius:8px;margin-top:4px}.navbtn:hover,.navbtn.active{background:#14263a;color:#fff}.navbtn.mod{font-weight:800;color:#f1f5f8;margin-top:9px}.navbtn.lesson{font-size:12px;padding-left:22px}.navbtn.done{color:#70d7aa}main{max-width:1100px;width:100%;margin:auto;padding:32px 26px}.hero{background:radial-gradient(circle at 90% 0,rgba(211,173,67,.13),transparent 30%),linear-gradient(135deg,#081522,#0d1c2c);border:1px solid var(--l);border-radius:22px;padding:34px}h1{font-size:42px;line-height:1.12;margin:9px 0}h2{font-size:26px;margin:8px 0}h3{font-size:18px}.muted{color:var(--m)}.price{font-size:34px;font-weight:900;margin:16px 0;color:var(--g2)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:18px}.card,.lessonbox,.legal{background:var(--n2);border:1px solid var(--l);border-radius:16px;padding:21px}.click{cursor:pointer}.click:hover{border-color:#9b7d32}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.tag{border:1px solid #3a4d65;border-radius:999px;padding:5px 9px;font-size:12px;color:#c8d4df}.progress{height:9px;background:#17293d;border-radius:99px;overflow:hidden;margin:12px 0}.progress span{display:block;height:100%;background:var(--g)}.actions{display:flex;justify-content:space-between;gap:10px;margin-top:22px}.lessonhead{display:flex;justify-content:space-between;gap:15px}.callout{margin-top:18px;border-left:3px solid var(--g);background:#07111d;padding:15px}.ai{margin-top:18px;border:1px solid #344b65;background:#0a1624;border-radius:12px;padding:15px}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.76);z-index:100;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.modalbox{width:min(470px,100%);background:#0b1726;border:1px solid #3a4d65;border-radius:18px;padding:24px}.modalbox input,.field{width:100%;margin:7px 0;padding:12px;border:1px solid #425873;border-radius:9px;background:#07111d;color:#fff}.status{margin-top:12px;padding:11px;border:1px solid var(--l);border-radius:9px}.examq{margin:14px 0;padding:15px;border:1px solid var(--l);border-radius:12px;background:#081522}.examq label{display:block;margin:8px 0;color:#cbd7e2}.verify{display:grid;grid-template-columns:1fr 1fr;gap:15px}.certwrap{overflow:auto;background:#071321;padding:18px;border-radius:18px}.cert{width:1123px;height:794px;margin:auto;position:relative;background:#f7f4ec;color:#071321;border:3px solid #d3ad43;overflow:hidden}.cert:before{content:"";position:absolute;inset:16px;border:1px solid #d3ad43}.cert .ribbon{position:absolute;top:0;right:36px;width:105px;height:175px;background:#071321;border:2px solid #d3ad43;border-top:0;color:#d3ad43;text-align:center;padding-top:25px;font-size:35px}.certLogo{position:absolute;top:22px;left:0;right:0;height:100px;display:flex;justify-content:center;align-items:center}.certLogo img{width:300px;height:92px;object-fit:contain;object-position:center}.cert h1{position:absolute;top:150px;left:0;right:0;text-align:center;font-size:25px}.cert .award{position:absolute;top:195px;left:0;right:0;text-align:center}.cert .name{position:absolute;top:218px;left:40px;right:40px;text-align:center;font:italic 48px Georgia,serif}.cert .course{position:absolute;top:302px;left:0;right:0;text-align:center;font-size:30px;font-weight:900}.cert .sub{position:absolute;top:345px;left:0;right:0;text-align:center;font-size:18px;font-weight:800}.cert .meta{position:absolute;top:402px;left:85px;right:85px;display:flex;justify-content:space-around;text-align:center;font-size:11px}.cert .meta div{width:25%;padding:0 10px;border-right:1px solid #d3ad43}.cert .meta div:last-child{border-right:0}.cert .meta b{display:block;margin-top:6px}.cert .body{position:absolute;top:480px;left:125px;right:125px;text-align:center;font-size:13px;line-height:1.45}.cert .sign{position:absolute;bottom:80px;width:220px;text-align:center;border-top:1px solid #9b7d32;padding-top:7px;font-size:10px}.sl{left:145px}.sr{right:145px}.seal{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);width:78px;height:78px;border-radius:50%;background:#071321;border:7px solid #d3ad43;color:#d3ad43;text-align:center;line-height:64px;font-size:27px;font-weight:900}.cert .footer{position:absolute;bottom:0;left:0;right:0;height:48px;background:#071321;color:#fff;padding:0 38px;display:flex;align-items:center;justify-content:space-between;font-size:9px}.cert .footer b{color:#e0bd55}footer{padding:28px;text-align:center;color:#667b92;font-size:12px}.cookie{position:fixed;left:15px;right:15px;bottom:15px;z-index:80;background:#0b1726;border:1px solid #3a4d65;border-radius:14px;padding:15px;display:none;align-items:center;gap:15px;justify-content:space-between}.cookie.show{display:flex}@media(max-width:800px){.logo-frame{width:220px;height:54px;max-width:58vw}.brand{display:none}.shell{display:block}aside{display:none}main{padding:18px 13px}h1{font-size:31px}.grid,.verify{grid-template-columns:1fr}.actions{flex-direction:column}.actions .btn{width:100%}}@media print{.top,aside,footer,.no-print{display:none!important}main{max-width:none;padding:0}.certwrap{padding:0;background:#fff}}
+<div class="shell">
+  <aside id="side"></aside>
+  <main id="main"></main>
+</div>
 
-</style></head><body>
+<footer>SENTINEL Academy · Formación privada · Certificado privado de finalización y aprovechamiento</footer>
 
-<header class="top"><div class="logo-frame"><img class="logo" src="sentinel-logo.png" alt="SENTINEL Academy"></div><div class="brand">IA PARA INTELIGENCIA · OSINT · ANÁLISIS · RIESGOS</div><div id="account" class="account"></div></header>
+<div id="auth" class="modal">
+  <div class="modalbox">
+    <button class="btn" style="float:right" onclick="closeAuth()">×</button>
+    <div class="eyebrow">SENTINEL ACADEMY</div>
+    <h2 id="authTitle">Iniciar sesión</h2>
+    <input id="email" class="field" type="email" placeholder="Correo electrónico">
+    <input id="password" class="field" type="password" placeholder="Contraseña">
+    <div id="signupChecks">
+      <label class="small"><input id="privacyOk" type="checkbox"> He leído y acepto la Política de Privacidad.</label><br>
+      <label class="small"><input id="termsOk" type="checkbox"> Acepto las Condiciones de Compra/uso.</label>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:10px">
+      <button class="btn primary" onclick="authSubmit()">Continuar</button>
+      <button class="btn" onclick="toggleAuth()">Cambiar</button>
+    </div>
+    <button id="forgotBtn" class="btn" style="margin-top:10px;width:100%" onclick="openReset()">He olvidado mi contraseña</button>
+    <div id="authMsg" class="status"></div>
+  </div>
+</div>
 
-<div class="shell"><aside id="side"></aside><main id="main"></main></div><footer>SENTINEL Academy · Formación privada · Certificado privado de finalización y aprovechamiento</footer>
+<div id="reset" class="modal">
+  <div class="modalbox">
+    <div class="eyebrow">RECUPERACIÓN SEGURA</div>
+    <h2>Nueva contraseña</h2>
+    <p class="muted">Has llegado desde el enlace de recuperación de Supabase. Elige una nueva contraseña.</p>
+    <input id="newPassword" class="field" type="password" placeholder="Nueva contraseña (mín. 6 caracteres)">
+    <input id="newPassword2" class="field" type="password" placeholder="Repite la contraseña">
+    <button class="btn primary" style="width:100%" onclick="saveNewPassword()">Actualizar contraseña</button>
+    <div id="resetMsg" class="status"></div>
+  </div>
+</div>
 
-<div id="auth" class="modal"><div class="modalbox"><button class="btn" style="float:right" onclick="closeAuth()">×</button><div class="eyebrow">SENTINEL ACADEMY</div><h2 id="authTitle">Iniciar sesión</h2><input id="email" type="email" placeholder="Correo electrónico"><input id="password" type="password" placeholder="Contraseña"><label><input id="privacyOk" type="checkbox"> He leído y acepto la Política de Privacidad.</label><label><input id="termsOk" type="checkbox"> Acepto las Condiciones de Compra/uso.</label><div style="display:flex;gap:10px"><button class="btn primary" onclick="authSubmit()">Continuar</button><button class="btn" onclick="toggleAuth()">Cambiar</button></div><div id="authMsg" class="status"></div></div></div>
+<div id="cookie" class="cookie">
+  <div><b>Privacidad y cookies</b><br><span class="muted">Esta versión utiliza almacenamiento técnico para sesión. No activa analítica publicitaria por defecto.</span></div>
+  <button class="btn primary" onclick="acceptCookie()">Entendido</button>
+</div>
 
-<div id="cookie" class="cookie"><div><b>Privacidad y cookies</b><br><span class="muted">Esta versión utiliza almacenamiento técnico para sesión y progreso. No activa analítica publicitaria por defecto.</span></div><button class="btn primary" onclick="acceptCookie()">Entendido</button></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="https://xxtfozgfejjyxtgekcjp.supabase.co";
+const SUPABASE_KEY="sb_publishable_IVyT9ZAxmfmXmZKiP_eQ8Q_S4hQHKAS";
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+let user=null, course=null, modules=[], lessons=[], current="home", currentLesson=null;
+let authMode="login", lessonProgress=new Set(), examScore=null, missionScore=null, examQuestions=[];
 
-const SUPABASE_URL="https://xxtfozgfejjyxtgekcjp.supabase.co";const SUPABASE_KEY="sb_publishable_IVyT9zAxmfmXmzKiP_eQ8Q_S4hQHKAS";const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);const PRICE=29.99;const VERIFY_BASE="https://sentinelacademy.com/verificar/";const PAYMENT_MODE="demo";
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+const by=(a,k)=>[...a].sort((x,y)=>(x[k]??0)-(y[k]??0));
 
-const lessons=[{"module": "PENSAR", "code": "1.1", "title": "Datos, información e inteligencia", "objective": "Distingue dato, información, análisis e inteligencia y relaciona cada nivel con una necesidad de decisión.", "activity": "Clasifica diez afirmaciones como hechos, inferencias o hipótesis.", "error": "No confundas una respuesta fluida con inteligencia: debe responder a una necesidad concreta."}, {"module": "PENSAR", "code": "1.2", "title": "Necesidad de inteligencia", "objective": "Convierte peticiones vagas en preguntas operativas definiendo decisor, decisión, horizonte, ámbito y criterio de éxito.", "activity": "Transforma tres peticiones genéricas en necesidades de inteligencia.", "error": "No empieces a buscar antes de saber qué pregunta debes responder."}, {"module": "PENSAR", "code": "1.3", "title": "Ciclo de inteligencia", "objective": "Aplica orientación, obtención, procesamiento, análisis, producción, difusión y retroalimentación como proceso iterativo.", "activity": "Construye el ciclo de un caso ficticio y registra qué decisión depende de cada fase.", "error": "Recopilar información no equivale a analizarla."}, {"module": "PENSAR", "code": "1.4", "title": "Hechos, inferencias e hipótesis", "objective": "Separa lo observado de lo interpretado y de las explicaciones que todavía deben contrastarse.", "activity": "Reescribe un párrafo confuso manteniendo la trazabilidad.", "error": "Nunca presentes una hipótesis como un hecho."}, {"module": "PENSAR", "code": "1.5", "title": "Sesgos y pensamiento estructurado", "objective": "Reconoce confirmación, anclaje, disponibilidad y exceso de confianza; utiliza hipótesis competidoras y revisión adversarial.", "activity": "Intenta refutar una conclusión propia con una explicación alternativa.", "error": "No busques únicamente evidencia que confirme tu primera impresión."}, {"module": "PENSAR", "code": "1.6", "title": "Incertidumbre y confianza", "objective": "Expresa conclusiones proporcionales a la evidencia y explica qué podría elevar o reducir la confianza.", "activity": "Redacta valoraciones con confianza baja, moderada y alta, justificándolas.", "error": "Evita porcentajes precisos cuando la evidencia no permite esa precisión."}, {"module": "INVESTIGAR", "code": "2.1", "title": "Diseñar una investigación", "objective": "Define objetivo, alcance, fecha de corte, entidades, preguntas, criterios de éxito y registro de evidencias.", "activity": "Crea un plan OSINT reproducible de una página.", "error": "No acumules enlaces sin criterio de parada."}, {"module": "INVESTIGAR", "code": "2.2", "title": "Arquitectura de búsqueda", "objective": "Construye búsquedas progresivas usando términos, nombres, frases exactas, dominios, fechas, idiomas y relaciones.", "activity": "Documenta diez consultas y qué incertidumbre reduce cada una.", "error": "No dependas de una única consulta."}, {"module": "INVESTIGAR", "code": "2.3", "title": "Evaluar una fuente", "objective": "Valora autoridad, proximidad al hecho, actualidad, interés, independencia, consistencia y trazabilidad.", "activity": "Evalúa cinco fuentes y separa calidad de fuente y calidad de afirmación.", "error": "Popularidad no significa fiabilidad."}, {"module": "INVESTIGAR", "code": "2.4", "title": "Corroboración e independencia", "objective": "Distingue corroboración real de repetición y compara origen, fecha, atribución, cifras y discrepancias.", "activity": "Construye una cadena de corroboración.", "error": "Varias páginas pueden repetir la misma fuente original."}, {"module": "INVESTIGAR", "code": "2.5", "title": "Cronologías y actores", "objective": "Ordena acontecimientos y vincula actores solo cuando exista evidencia, separando relaciones observadas e inferidas.", "activity": "Construye una cronología y un mapa básico de actores.", "error": "Proximidad temporal no demuestra causalidad."}, {"module": "INVESTIGAR", "code": "2.6", "title": "Información engañosa y verificación", "objective": "Detecta contexto perdido, atribuciones débiles, material reutilizado y afirmaciones sin respaldo suficiente.", "activity": "Clasifica afirmaciones como confirmadas, parcialmente confirmadas, no confirmadas o refutadas.", "error": "No confirmado no significa automáticamente falso."}, {"module": "POTENCIAR", "code": "3.1", "title": "Modelo mental de la IA", "objective": "Comprende la IA generativa como herramienta de apoyo: rápida para transformar material, pero capaz de producir errores.", "activity": "Divide una investigación en tareas donde la IA ayuda y tareas que requieren validación humana.", "error": "Una respuesta convincente no es una fuente."}, {"module": "POTENCIAR", "code": "3.2", "title": "Extracción estructurada", "objective": "Extrae entidades, fechas, afirmaciones y relaciones conservando el origen y marcando dudas.", "activity": "Convierte un documento ficticio en una tabla de evidencias.", "error": "Revisa siempre el documento original."}, {"module": "POTENCIAR", "code": "3.3", "title": "Comparación de documentos", "objective": "Usa IA para detectar coincidencias, cambios y contradicciones entre versiones.", "activity": "Compara dos documentos y verifica cada diferencia relevante.", "error": "Una diferencia textual no siempre es una diferencia analítica."}, {"module": "POTENCIAR", "code": "3.4", "title": "IA para hipótesis", "objective": "Genera explicaciones alternativas y preguntas de investigación sin convertir posibilidades en hechos.", "activity": "Construye una matriz con hipótesis, evidencias a favor, en contra y observaciones discriminantes.", "error": "No pidas a la IA que decida quién es responsable."}, {"module": "POTENCIAR", "code": "3.5", "title": "Prompt Maestro SENTINEL", "objective": "Construye prompts con objetivo, contexto, corpus, límites, criterios de calidad, formato, incertidumbre y revisión.", "activity": "Transforma un prompt genérico en un Prompt Maestro.", "error": "Un prompt vago produce resultados difíciles de auditar."}, {"module": "POTENCIAR", "code": "3.6", "title": "Revisión adversarial", "objective": "Utiliza IA para buscar hechos sin fuente, contradicciones, saltos inferenciales y exceso de certeza.", "activity": "Audita un brief defectuoso y corrígelo.", "error": "No uses la misma salida como única comprobación."}, {"module": "POTENCIAR", "code": "3.7", "title": "Flujo SENTINEL de IA", "objective": "Integra preparar corpus, extraer, comparar, generar alternativas, analizar, redactar, auditar y verificar.", "activity": "Ejecuta un mini-flujo completo y registra dónde intervino la IA.", "error": "La IA acelera tareas; el analista conserva el criterio."}, {"module": "ANALIZAR", "code": "4.1", "title": "Análisis de actores", "objective": "Identifica intereses, capacidades, dependencias, incentivos y restricciones sin atribuir intenciones por asociación.", "activity": "Construye una matriz de actores con evidencia y confianza.", "error": "Una relación comercial no demuestra coordinación."}, {"module": "ANALIZAR", "code": "4.2", "title": "Hipótesis competidoras", "objective": "Compara explicaciones alternativas mediante evidencias a favor, en contra y neutrales.", "activity": "Actualiza una matriz de hipótesis tras recibir nueva evidencia.", "error": "No crees hipótesis alternativas artificialmente débiles."}, {"module": "ANALIZAR", "code": "4.3", "title": "Valoración y confianza", "objective": "Redacta conclusiones calibradas y explica su respaldo, lagunas y condiciones de cambio.", "activity": "Convierte conclusiones absolutas en valoraciones defendibles.", "error": "Confianza no equivale a probabilidad matemática."}, {"module": "ANALIZAR", "code": "4.4", "title": "Riesgo", "objective": "Define evento, probabilidad cualitativa, impacto, horizonte, indicadores y mitigaciones.", "activity": "Crea una matriz de riesgos priorizada.", "error": "Evita falsa precisión numérica."}, {"module": "ANALIZAR", "code": "4.5", "title": "Indicadores y alertas", "objective": "Diseña señales observables que aumenten o reduzcan la confianza en una hipótesis o riesgo.", "activity": "Define cinco indicadores y qué cambio activaría una revisión.", "error": "Un indicador debe tener relación razonable con la hipótesis."}, {"module": "ANALIZAR", "code": "4.6", "title": "Escenarios", "objective": "Construye escenarios base, alternativo y adverso y define señales tempranas para cada uno.", "activity": "Redacta tres escenarios y sus indicadores.", "error": "Un escenario no es una predicción inevitable."}, {"module": "INFORMAR", "code": "5.1", "title": "Pensar en el decisor", "objective": "Traducir análisis en una respuesta que ayude a decidir, priorizando lo que cambia la valoración.", "activity": "Transforma diez páginas de notas en cinco mensajes prioritarios.", "error": "No escondas la conclusión detrás de la metodología."}, {"module": "INFORMAR", "code": "5.2", "title": "BLUF e Intelligence Brief", "objective": "Redacta una conclusión primero y sostenla con evidencia, incertidumbre e implicaciones.", "activity": "Escribe un brief de una página con conclusión, evidencia clave, confianza y próximos indicadores.", "error": "No mezcles hechos y recomendaciones sin transición."}, {"module": "INFORMAR", "code": "5.3", "title": "Visualización analítica", "objective": "Elige tablas, cronologías y gráficos que ayuden a comprender relaciones y cambios.", "activity": "Transforma una matriz de evidencias en una visualización adecuada.", "error": "No diseñes para decorar; diseña para comprender."}, {"module": "INFORMAR", "code": "5.4", "title": "Trazabilidad y lenguaje calibrado", "objective": "Redacta afirmaciones con fuentes y expresa confianza proporcional a la evidencia.", "activity": "Revisa un brief con seis afirmaciones y corrige sus niveles de certeza.", "error": "Evita dramatización y absolutos."}, {"module": "INFORMAR", "code": "5.5", "title": "Revisión por pares", "objective": "Aplica una revisión estructurada antes de entregar un producto.", "activity": "Intercambia dos briefs ficticios y usa una rúbrica de revisión.", "error": "Mejorar el estilo no arregla un razonamiento deficiente."}, {"module": "INFORMAR", "code": "5.6", "title": "Brief ejecutivo final", "objective": "Construye un producto ejecutivo defendible y accionable.", "activity": "Entrega un Intelligence Brief de dos páginas y una versión oral de 90 segundos.", "error": "Revisar ortografía no es revisar el análisis."}, {"module": "DECIDIR", "code": "6.1", "title": "De inteligencia a decisión", "objective": "Conecta una valoración con opciones de actuación sin confundir análisis con decisión.", "activity": "Construye tres cursos de acción para un caso ficticio.", "error": "El analista informa; el decisor decide."}, {"module": "DECIDIR", "code": "6.2", "title": "Operación SENTINEL · Briefing", "objective": "Recibe el escenario, delimita necesidad y establece prioridades de investigación.", "activity": "Recibe el briefing de Horizonte Norte y redacta la necesidad de inteligencia.", "error": "No saltes directamente a una explicación."}, {"module": "DECIDIR", "code": "6.3", "title": "Operación SENTINEL · Investigación", "objective": "Construye consultas, registra fuentes y completa cronología y actores usando el corpus autorizado.", "activity": "Entrega registro OSINT y mapa de actores.", "error": "No introduzcas hechos externos como si fueran parte del expediente."}, {"module": "DECIDIR", "code": "6.4", "title": "Operación SENTINEL · Análisis", "objective": "Formula al menos tres hipótesis, identifica contradicciones y construye matriz de riesgos e indicadores.", "activity": "Entrega hipótesis, riesgos, indicadores y confianza.", "error": "No elijas hipótesis demasiado pronto."}, {"module": "DECIDIR", "code": "6.5", "title": "Operación SENTINEL · Producto", "objective": "Redacta un Intelligence Brief de una página más anexo de trazabilidad.", "activity": "Entrega producto final con fuentes, confianza y limitaciones.", "error": "Un informe largo que no responde al decisor no es un buen producto."}, {"module": "DECIDIR", "code": "6.6", "title": "Defensa del análisis y cierre", "objective": "Defiende el razonamiento, reconoce límites y actualiza la valoración ante nueva evidencia.", "activity": "Defiende tu conclusión ante preguntas adversariales y registra qué cambió y por qué.", "error": "Mantener la conclusión inicial por coherencia narrativa es un error."}];const md={"PENSAR": "Fundamentos del pensamiento analítico, necesidades, hipótesis, sesgos e incertidumbre.", "INVESTIGAR": "OSINT, evaluación de fuentes, verificación, cronologías y actores.", "POTENCIAR": "IA como copiloto: prompting, extracción, comparación, Red Team y control de calidad.", "ANALIZAR": "Actores, hipótesis, evidencia, escenarios, indicadores y riesgos.", "INFORMAR": "Decisor, BLUF, Intelligence Brief, visualización, trazabilidad y revisión.", "DECIDIR": "Operación SENTINEL — Horizonte Norte, decisión, reevaluación y defensa."};let user=null,current="home",done=[],examPassed=false,missionScore=null,authMode="login";
+async function loadData(){
+  const c=await sb.from("courses").select("id,title,slug,price,published").eq("slug","sentinel-academy").maybeSingle();
+  if(c.error) throw c.error;
+  course=c.data;
+  if(!course){modules=[];lessons=[];return}
+  const m=await sb.from("modules").select("id,course_id,module_number,title").eq("course_id",course.id).order("module_number");
+  if(m.error) throw m.error;
+  modules=m.data||[];
+  const ids=modules.map(x=>x.id);
+  if(!ids.length){lessons=[];return}
+  const l=await sb.from("lessons").select("*").in("module_id",ids).order("module_id").order("lesson_number");
+  if(l.error) throw l.error;
+  lessons=l.data||[];
+}
 
-const exam=[["¿Qué convierte información en inteligencia?",["El volumen de datos","Su relación con una necesidad de decisión","Que proceda de una IA"],1],["¿Qué es una hipótesis?",["Un hecho confirmado","Una explicación que debe contrastarse","Una opinión sin evidencia"],1],["¿Qué práctica OSINT es preferible?",["Aceptar el primer resultado","Corroborar y evaluar fuentes","Copiar una fuente repetida"],1],["¿Qué debe hacer la IA?",["Sustituir la verificación","Apoyar tareas con límites y revisión humana","Decidir responsabilidades"],1],["¿Qué demuestra una relación temporal?",["Siempre causalidad","Nada por sí sola","Responsabilidad"],1],["¿Qué debe contener un Intelligence Brief?",["Solo enlaces","Valoración, evidencia, incertidumbre y elementos útiles para decidir","Solo una opinión"],1],["¿Cómo se expresa una conclusión con evidencia incompleta?",["Como certeza absoluta","Con lenguaje calibrado","Sin mencionar límites"],1],["¿Qué representa una matriz de riesgos?",["Una predicción segura","Una herramienta de priorización","Una prueba de causalidad"],1],["¿Qué acompaña a una afirmación relevante?",["Una fuente o evidencia rastreable","Una respuesta de IA","Un adjetivo"],0],["¿Quién mantiene el control final?",["El modelo de IA","El analista, con verificación y trazabilidad","El buscador"],1]];
+async function loadProgress(){
+  lessonProgress=new Set();
+  if(!user)return;
+  const r=await sb.from("lesson_progress").select("*").eq("user_id",user.id);
+  if(!r.error){
+    (r.data||[]).forEach(x=>{
+      if(x.completed===true || x.status==="completed" || x.completed_at) lessonProgress.add(x.lesson_id);
+    });
+  }
+}
 
-function esc(s){return String(s).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]))}function id(l){return l.code.replace('.','-')}function pct(){return Math.round(done.length/lessons.length*100)}function mods(){return [...new Set(lessons.map(x=>x.module))]}function stateKey(){return 'sentinel_v4_'+(user?.id||'guest')}function load(){try{let x=JSON.parse(localStorage.getItem(stateKey())||'{}');done=x.done||[];examPassed=!!x.examPassed;missionScore=x.missionScore??null}catch(e){done=[];examPassed=false;missionScore=null}}function save(){localStorage.setItem(stateKey(),JSON.stringify({done,examPassed,missionScore}));localStorage.setItem('sentinel_current',current)}
+async function loadEnrollment(){
+  if(!user||!course)return null;
+  const r=await sb.from("enrollments").select("*").eq("user_id",user.id).eq("course_id",course.id).maybeSingle();
+  return r.error?null:r.data;
+}
 
-function go(x){current=x;save();render();scrollTo({top:0,behavior:'smooth'})}function account(){let a=document.getElementById('account');a.innerHTML=user?`<span class="muted">${esc(user.email||'Alumno')}</span><button class="btn" onclick="logout()">Salir</button>`:`<button class="btn" onclick="openAuth('login')">Iniciar sesión</button>`}
+function account(){
+  const a=document.getElementById("account");
+  a.innerHTML=user
+    ? `<span class="small">${esc(user.email)}</span><button class="btn" onclick="logout()">Salir</button>`
+    : `<button class="btn" onclick="openAuth('login')">Entrar</button><button class="btn primary" onclick="openAuth('signup')">Crear cuenta</button>`;
+}
 
-function side(){let s=`<div class="navtitle">PROGRAMA · 37 LECCIONES</div><button class="navbtn mod" onclick="go('home')">⌂ Dashboard</button><button class="navbtn mod" onclick="go('resources')">▣ Recursos</button><button class="navbtn mod" onclick="go('exam')">✓ Evaluación final</button><button class="navbtn mod" onclick="go('mission')">◈ Operación SENTINEL</button><button class="navbtn mod" onclick="go('certificate')">★ Certificado</button>`;mods().forEach(m=>{s+=`<button class="navbtn mod" onclick="go('M${m}')">${m}</button>`;lessons.filter(l=>l.module===m).forEach(l=>s+=`<button class="navbtn lesson ${current===id(l)?'active':''} ${done.includes(id(l))?'done':''}" onclick="go('${id(l)}')">${done.includes(id(l))?'✓ ':''}${l.code} · ${esc(l.title)}</button>`)});s+=`<button class="navbtn mod" onclick="go('verify')">⌕ Verificar certificado</button><button class="navbtn mod" onclick="go('legal')">§ Información legal</button>`;document.getElementById('side').innerHTML=s}
+function side(){
+  const s=document.getElementById("side");
+  s.innerHTML=`<div class="navtitle">NAVEGACIÓN</div>
+  <button class="navbtn ${current==="home"?"active":""}" onclick="go('home')">⌂ Inicio</button>
+  <button class="navbtn ${current==="resources"?"active":""}" onclick="go('resources')">▣ Biblioteca</button>
+  <button class="navbtn ${current==="exam"?"active":""}" onclick="go('exam')">◆ Evaluación final</button>
+  <button class="navbtn ${current==="mission"?"active":""}" onclick="go('mission')">◈ Operación SENTINEL</button>
+  <button class="navbtn ${current==="certificate"?"active":""}" onclick="go('certificate')">★ Certificado</button>
+  <button class="navbtn ${current==="verify"?"active":""}" onclick="go('verify')">✓ Verificar certificado</button>
+  <button class="navbtn ${current==="legal"?"active":""}" onclick="go('legal')">⚖ Legal</button>
+  <div class="navtitle" style="margin-top:22px">PROGRAMA</div>
+  ${modules.map(m=>`<button class="navbtn mod" onclick="go('M${m.id}')">M${m.module_number} · ${esc(m.title)}</button>
+  ${by(lessons.filter(l=>l.module_id===m.id),"lesson_number").map(l=>`<button class="navbtn lesson ${lessonProgress.has(l.id)?"done":""}" onclick="openLesson('${l.id}')">${lessonProgress.has(l.id)?"✓ ":""}${esc(l.title)}</button>`).join("")}`).join("")}`;
+}
 
-function home(){let n=lessons.find(l=>!done.includes(id(l)));document.getElementById('main').innerHTML=`<section class="hero"><div class="eyebrow">FORMACIÓN ESPECIALIZADA · V4</div><h1>IA aplicada al Análisis de Inteligencia</h1><p class="muted">Aprende a transformar información abierta en productos de inteligencia útiles para la toma de decisiones, utilizando IA como apoyo del analista.</p><div class="price">29,99 €</div><div class="tags"><span class="tag">37 lecciones</span><span class="tag">30–40 horas estimadas</span><span class="tag">OSINT</span><span class="tag">IA</span><span class="tag">Riesgos</span><span class="tag">Intelligence Brief</span><span class="tag">Operación SENTINEL</span></div><div class="actions"><button class="btn primary" onclick="${user?`go('${n?id(n):'exam'}')`:`openAuth('signup')`}">${user?(n?'Continuar curso':'Ir a evaluación'):'Comenzar'}</button><button class="btn" onclick="purchase()">Comprar por 29,99 €</button></div></section><div class="grid"><div class="card"><div class="eyebrow">PROGRESO</div><h2>${pct()}%</h2><div class="progress"><span style="width:${pct()}%"></span></div><span class="muted">${done.length}/${lessons.length} lecciones</span></div><div class="card"><div class="eyebrow">CERTIFICACIÓN</div><h2>Finalización y aprovechamiento</h2><p class="muted">Certificado privado de alta calidad, con ID único y verificación.</p></div></div><div class="grid">${mods().map(m=>`<div class="card click" onclick="go('M${m}')"><div class="eyebrow">${m}</div><h2>${m}</h2><p class="muted">${md[m]}</p></div>`).join('')}</div>`}
+async function home(){
+  const enrolled=await loadEnrollment();
+  const pct=lessons.length?Math.round(lessonProgress.size/lessons.length*100):0;
+  document.getElementById("main").innerHTML=`<section class="hero">
+    <div class="eyebrow">SENTINEL ACADEMY</div>
+    <h1>IA aplicada al<br>Análisis de Inteligencia</h1>
+    <p class="muted">Programa privado de formación en inteligencia, OSINT, análisis estructurado, riesgos e IA como copiloto del analista.</p>
+    <div class="tags"><span class="tag">6 módulos</span><span class="tag">${lessons.length||36} lecciones</span><span class="tag">Cuestionarios</span><span class="tag">Operación SENTINEL</span></div>
+    ${user&&enrolled?`<div class="card" style="margin-top:20px"><b>Tu progreso</b><div class="progress"><span style="width:${pct}%"></span></div><div class="muted">${lessonProgress.size}/${lessons.length} lecciones completadas · ${pct}%</div></div>`:
+    `<div style="margin-top:20px"><button class="btn primary" onclick="openAuth('login')">Acceder a la academia</button></div>`}
+  </section>
+  <div class="grid">
+    ${modules.map(m=>`<div class="card click" onclick="go('M${m.id}')"><div class="eyebrow">MÓDULO ${m.module_number}</div><h2>${esc(m.title)}</h2><p class="muted">${lessons.filter(l=>l.module_id===m.id).length} lecciones con evaluación práctica.</p></div>`).join("")}
+  </div>`;
+}
 
-function modulePage(m){let ls=lessons.filter(l=>l.module===m);document.getElementById('main').innerHTML=`<div class="eyebrow">MÓDULO</div><h1>${m}</h1><p class="muted">${md[m]}</p><div class="grid">${ls.map(l=>`<div class="card click" onclick="go('${id(l)}')"><div class="eyebrow">${done.includes(id(l))?'✓ COMPLETADA':l.code}</div><h2>${esc(l.title)}</h2><p class="muted">${esc(l.objective)}</p></div>`).join('')}</div>`}
+function modulePage(id){
+  const m=modules.find(x=>x.id===id);
+  if(!m){home();return}
+  const ls=by(lessons.filter(x=>x.module_id===id),"lesson_number");
+  document.getElementById("main").innerHTML=`<div class="eyebrow">MÓDULO ${m.module_number}</div><h1>${esc(m.title)}</h1>
+  <p class="muted">${ls.length} lecciones · cuestionarios integrados.</p>
+  <div class="grid">${ls.map(l=>`<div class="card click" onclick="openLesson('${l.id}')"><div class="eyebrow">LECCIÓN ${l.lesson_number}</div><h3>${esc(l.title)}</h3><p class="muted">${lessonProgress.has(l.id)?"✓ Completada":"Pendiente"}</p></div>`).join("")}</div>`;
+}
 
-function lessonPage(k){let l=lessons.find(x=>id(x)===k);if(!l){go('home');return}let i=lessons.indexOf(l),p=lessons[i-1],n=lessons[i+1],d=done.includes(k);document.getElementById('main').innerHTML=`<div class="lessonhead"><div><div class="eyebrow">${l.module} · ${l.code}</div><h1>${esc(l.title)}</h1></div><span class="tag">${d?'✓ COMPLETADA':'EN CURSO'}</span></div><div class="lessonbox"><h3>Objetivo</h3><p>${esc(l.objective)}</p><div class="ai"><b>🤖 IA SENTINEL</b><p>Utiliza la IA para estructurar, contrastar o auditar el material suministrado. No inventes hechos y conserva la trazabilidad. La validación final corresponde al analista.</p></div><div class="callout"><b>Actividad práctica</b><p>${esc(l.activity)}</p></div><div class="callout" style="border-left-color:#9aa6b5"><b>Error a evitar</b><p>${esc(l.error)}</p></div></div><div class="actions"><button class="btn" onclick="go('${p?id(p):'home'}')">← Anterior</button><button class="btn primary" onclick="complete('${k}')">${d?(n?'Siguiente →':'Ir a evaluación'):'Marcar completada ✓'}</button></div>`}
+async function openLesson(id){
+  currentLesson=lessons.find(x=>x.id===id);
+  if(!currentLesson)return;
+  current="L"+id; side();
+  document.getElementById("main").innerHTML=`<div class="lessonbox"><div class="eyebrow">CARGANDO LECCIÓN</div><h1>${esc(currentLesson.title)}</h1><p class="muted">Cargando contenido y cuestionario seguro…</p></div>`;
+  try{
+    if(!user)throw new Error("Debes iniciar sesión para acceder a las lecciones.");
+    const enr=await loadEnrollment();
+    if(!enr || enr.status!=="active")throw new Error("Necesitas una matrícula activa para acceder.");
+    const r=await sb.rpc("get_lesson_quiz",{p_lesson_id:id});
+    if(r.error)throw r.error;
+    renderLesson(currentLesson,r.data||[]);
+  }catch(e){
+    document.getElementById("main").innerHTML=`<div class="lessonbox"><div class="eyebrow">ACCESO</div><h1>${esc(currentLesson.title)}</h1><div class="status bad">${esc(e.message||"No se pudo cargar la lección.")}</div><button class="btn" style="margin-top:12px" onclick="go('home')">Volver</button></div>`;
+  }
+}
 
-function complete(k){if(!user){openAuth('login');document.getElementById('authMsg').textContent='Inicia sesión para guardar tu progreso.';return}if(!done.includes(k))done.push(k);let i=lessons.findIndex(x=>id(x)===k);current=lessons[i+1]?id(lessons[i+1]):'exam';save();render()}
+function renderLesson(l,quiz){
+  const content=l.content||l.body||l.description||"Esta lección está preparada para el contenido académico de la versión comercial.";
+  document.getElementById("main").innerHTML=`<div class="lessonbox">
+    <div class="eyebrow">LECCIÓN ${esc(l.lesson_number)}</div>
+    <h1>${esc(l.title)}</h1>
+    <div class="callout">${esc(content)}</div>
+    <div class="quiz"><div class="eyebrow">CUESTIONARIO</div><p class="muted">${quiz.length} preguntas · las respuestas correctas no se envían al navegador.</p>
+    ${quiz.map((q,i)=>`<div class="q" data-q="${q.id}"><b>${i+1}. ${esc(q.question_text)}</b>
+      ${(q.options||[]).map(o=>`<label class="option"><input type="radio" name="q_${q.id}" value="${o.id}"> ${esc(o.option_text)}</label>`).join("")}
+      <div id="res_${q.id}" class="small"></div></div>`).join("")}
+    </div>
+    <button class="btn primary" onclick="submitLessonQuiz()">Corregir cuestionario</button>
+    <div id="quizTotal" class="status"></div>
+  </div>`;
+  window.activeQuiz=quiz;
+}
 
-function resources(){let a=['Ficha de necesidad de inteligencia','Registro OSINT','Ficha de evaluación de fuentes','Matriz de actores','Matriz de hipótesis','Matriz de evidencia','Matriz de riesgos','Plantilla de indicadores y alertas','Prompt Maestro SENTINEL','Checklist de verificación de IA','Plantilla Intelligence Brief','Checklist final de control de calidad','Hoja de evaluación Operación SENTINEL'];document.getElementById('main').innerHTML=`<div class="eyebrow">RECURSOS</div><h1>Biblioteca SENTINEL</h1><p class="muted">13 recursos previstos para acompañar el programa.</p><div class="grid">${a.map((x,i)=>`<div class="card"><div class="eyebrow">${String(i+1).padStart(2,'0')}</div><h3>${x}</h3><p class="muted">Recurso preparado para la versión comercial.</p></div>`).join('')}</div>`}
+async function submitLessonQuiz(){
+  if(!window.activeQuiz?.length)return;
+  let correct=0,answered=0;
+  for(const q of window.activeQuiz){
+    const selected=document.querySelector(`input[name="q_${q.id}"]:checked`);
+    if(!selected)continue;
+    answered++;
+    const r=await sb.rpc("submit_quiz_answer",{p_question_id:q.id,p_selected_option_id:selected.value});
+    const box=document.getElementById("res_"+q.id);
+    if(r.error){box.textContent=r.error.message||"Error";box.className="small bad";continue}
+    if(r.data?.is_correct){correct++;box.textContent="✓ Correcta"+(r.data.explanation?" · "+r.data.explanation:"");box.className="small ok"}
+    else{box.textContent="✗ Incorrecta"+(r.data?.explanation?" · "+r.data.explanation:"");box.className="small bad"}
+  }
+  const pct=Math.round(correct/window.activeQuiz.length*100);
+  document.getElementById("quizTotal").className="status "+(pct>=70?"ok":"bad");
+  document.getElementById("quizTotal").innerHTML=`Resultado: <b>${correct}/${window.activeQuiz.length} · ${pct}/100</b>. ${pct>=70?"Cuestionario superado.":"Repasa la lección y vuelve a intentarlo."}`;
+  if(pct>=70)await markLessonComplete(currentLesson.id);
+}
 
-function examPage(){document.getElementById('main').innerHTML=`<div class="eyebrow">EVALUACIÓN FINAL</div><h1>Evaluación de SENTINEL Academy</h1><p class="muted">10 preguntas · umbral de superación 70/100.</p>${exam.map((q,i)=>`<div class="examq"><b>${i+1}. ${q[0]}</b>${q[1].map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join('')}</div>`).join('')}<button class="btn primary" onclick="grade()">Corregir examen</button><div class="status">${examPassed?'✓ Examen superado previamente.':''}</div>`}
+async function markLessonComplete(lessonId){
+  const payload={user_id:user.id,lesson_id:lessonId,completed:true,completed_at:new Date().toISOString()};
+  const r=await sb.from("lesson_progress").upsert(payload,{onConflict:"user_id,lesson_id"});
+  if(!r.error){lessonProgress.add(lessonId);side();}
+}
 
-function grade(){let s=0;exam.forEach((q,i)=>{let a=document.querySelector(`input[name=q${i}]:checked`);if(a&&+a.value===q[2])s++});examPassed=s>=7;save();examPage();}
+function resources(){
+  const a=["Matriz de hipótesis","Matriz de evidencia","Matriz de riesgos","Plantilla de indicadores y alertas","Prompt Maestro SENTINEL","Checklist de verificación de IA","Plantilla Intelligence Brief","Checklist final de control de calidad","Hoja de evaluación Operación SENTINEL"];
+  document.getElementById("main").innerHTML=`<div class="eyebrow">RECURSOS</div><h1>Biblioteca SENTINEL</h1><p class="muted">Recursos previstos para acompañar el programa.</p><div class="grid">${a.map((x,i)=>`<div class="card"><div class="eyebrow">${String(i+1).padStart(2,"0")}</div><h3>${x}</h3><p class="muted">Recurso preparado para la versión comercial.</p></div>`).join("")}</div>`;
+}
 
-function mission(){document.getElementById('main').innerHTML=`<div class="eyebrow">OPERACIÓN SENTINEL — HORIZONTE NORTE</div><h1>Misión final</h1><div class="card"><h2>Escenario</h2><p>NOVA Systems, empresa ficticia, detecta cambios simultáneos en proveedores, dirección, actividad comercial y presencia digital.</p><p class="muted">El alumno formula la necesidad, investiga el expediente autorizado, construye hipótesis, evalúa riesgos, redacta un Intelligence Brief y defiende la valoración.</p></div><div class="card" style="margin-top:15px"><h2>Rúbrica</h2><div class="tags"><span class="tag">Problema 15%</span><span class="tag">Fuentes 20%</span><span class="tag">Análisis 25%</span><span class="tag">Riesgos 15%</span><span class="tag">Producto 15%</span><span class="tag">Rigor 10%</span></div><p>Umbral: <b>70/100</b>.</p><input id="ms" class="field" type="number" min="0" max="100" value="${missionScore??''}" placeholder="Puntuación 0–100"><button class="btn primary" onclick="saveMission()">Guardar valoración</button><div class="status">${missionScore!==null?(missionScore>=70?'✓ Misión superada':'✗ Pendiente de superar'): 'Aún no registrada.'}</div></div>`}
+async function exam(){
+  if(!user){openAuth("login");return}
+  if(!lessons.length){document.getElementById("main").innerHTML="<div class='status bad'>No hay lecciones disponibles.</div>";return}
+  document.getElementById("main").innerHTML="<div class='lessonbox'><div class='eyebrow'>EVALUACIÓN FINAL</div><h1>Preparando examen…</h1></div>";
+  let all=[];
+  for(const l of lessons){
+    const r=await sb.rpc("get_lesson_quiz",{p_lesson_id:l.id});
+    if(!r.error)(r.data||[]).forEach(q=>all.push(q));
+  }
+  all=all.sort(()=>Math.random()-.5).slice(0,10);
+  examQuestions=all;
+  document.getElementById("main").innerHTML=`<div class="eyebrow">EVALUACIÓN FINAL</div><h1>Examen SENTINEL Academy</h1><p class="muted">10 preguntas · umbral de superación 70/100.</p>
+  ${all.map((q,i)=>`<div class="q"><b>${i+1}. ${esc(q.question_text)}</b>${(q.options||[]).map(o=>`<label class="option"><input type="radio" name="ex_${q.id}" value="${o.id}"> ${esc(o.option_text)}</label>`).join("")}</div>`).join("")}
+  <button class="btn primary" onclick="gradeExam()">Corregir examen</button><div id="examResult" class="status"></div>`;
+}
 
-function saveMission(){missionScore=Math.max(0,Math.min(100,Number(document.getElementById('ms').value||0)));save();mission()}
+async function gradeExam(){
+  let correct=0,answered=0;
+  for(const q of examQuestions){
+    const selected=document.querySelector(`input[name="ex_${q.id}"]:checked`);
+    if(!selected)continue;answered++;
+    const r=await sb.rpc("submit_quiz_answer",{p_question_id:q.id,p_selected_option_id:selected.value});
+    if(!r.error&&r.data?.is_correct)correct++;
+  }
+  const pct=examQuestions.length?Math.round(correct/examQuestions.length*100):0;
+  examScore=pct;
+  const box=document.getElementById("examResult");
+  box.className="status "+(pct>=70?"ok":"bad");
+  box.innerHTML=`Resultado: <b>${correct}/${examQuestions.length} · ${pct}/100</b>. ${pct>=70?"✓ Examen superado.":"✗ Necesitas al menos 70/100."}`;
+}
 
-function certId(){let k='sentinel_cert_'+(user?.id||'demo'),v=localStorage.getItem(k);if(!v){v='SEN-'+new Date().getFullYear()+'-'+String(Math.floor(100000+Math.random()*900000));localStorage.setItem(k,v)}return v}
+function mission(){
+  document.getElementById("main").innerHTML=`<div class="eyebrow">OPERACIÓN SENTINEL — HORIZONTE NORTE</div><h1>Misión final</h1>
+  <div class="card"><h2>Escenario</h2><p>NOVA Systems, empresa ficticia, detecta cambios simultáneos en proveedores, dirección, actividad comercial y presencia digital.</p><p class="muted">Formula la necesidad, investiga el expediente autorizado, construye hipótesis, evalúa riesgos, redacta un Intelligence Brief y defiende la valoración.</p></div>
+  <div class="card" style="margin-top:15px"><h2>Rúbrica</h2><div class="tags"><span class="tag">Problema 15%</span><span class="tag">Fuentes 20%</span><span class="tag">Análisis 25%</span><span class="tag">Riesgos 15%</span><span class="tag">Producto 15%</span><span class="tag">Rigor 10%</span></div>
+  <p>Umbral: <b>70/100</b>.</p><input id="ms" class="field" type="number" min="0" max="100" value="${missionScore??""}" placeholder="Puntuación 0–100">
+  <button class="btn primary" onclick="saveMission()">Guardar valoración</button><div class="status">${missionScore!==null?(missionScore>=70?"✓ Misión superada":"✗ Pendiente de superar"):"Aún no registrada."}</div></div>`;
+}
+function saveMission(){missionScore=Math.max(0,Math.min(100,Number(document.getElementById("ms").value||0)));mission();}
 
-function eligible(){return done.length===lessons.length&&examPassed&&Number(missionScore)>=70}
+function certificate(){
+  const completed=lessonProgress.size===lessons.length;
+  const ok=completed&&Number(examScore)>=70&&Number(missionScore)>=70;
+  const name=user?.user_metadata?.full_name||user?.email||"[NOMBRE DEL ALUMNO]";
+  const cid="SEN-"+new Date().getFullYear()+"-"+String(Math.floor(100000+Math.random()*900000));
+  document.getElementById("main").innerHTML=`<div class="no-print"><div class="eyebrow">CERTIFICACIÓN</div><h1>Certificado SENTINEL Academy</h1><p class="muted">${ok?"Criterios cumplidos.":"Requisitos: 36/36 lecciones + examen ≥70 + Operación SENTINEL ≥70."}</p><button class="btn primary" ${ok?"":"disabled"} onclick="print()">Imprimir / guardar como PDF</button></div>
+  <div class="certwrap"><div class="cert"><div class="certLogo"><img src="sentinel-logo.png" alt="SENTINEL Academy"></div>
+  <h1>CERTIFICADO DE FINALIZACIÓN Y APROVECHAMIENTO</h1><div class="award">Se otorga a</div><div class="name">${esc(name)}</div>
+  <div style="position:absolute;top:274px;left:0;right:0;text-align:center">por haber completado satisfactoriamente el curso</div>
+  <div class="course">IA PARA INTELIGENCIA</div><div class="sub">FUNDAMENTOS, OSINT Y ANÁLISIS CON IA</div>
+  <div class="meta"><div>DURACIÓN<b>40 HORAS ESTIMADAS</b></div><div>FECHA DE EMISIÓN<b>${new Date().toLocaleDateString("es-ES")}</b></div><div>ESTÁNDARES<b>SENTINEL ACADEMY</b></div><div>VERIFICACIÓN<b>${cid}</b></div></div>
+  <div class="body">Programa privado de formación en inteligencia, OSINT, análisis estructurado, evaluación de fuentes, IA como copiloto, gestión de riesgos e Intelligence Brief.<br>El alumno ha completado la <b>Operación SENTINEL — Horizonte Norte</b> y los criterios de evaluación establecidos.</div>
+  <div class="sign sl">DIRECTOR ACADÉMICO<br><b>SENTINEL ACADEMY</b></div><div class="sign sr">COORDINADOR ACADÉMICO<br><b>SENTINEL ACADEMY</b></div><div class="seal">S</div>
+  <div class="footer"><span>VERIFICACIÓN · SENTINEL ACADEMY</span><span>CERTIFICADO Nº <b>${cid}</b></span></div></div></div>
+  <p class="muted no-print">Certificado privado. No constituye titulación oficial, homologación ni habilitación profesional regulada.</p>`;
+}
 
-function certificate(){let ok=eligible(),name=user?.user_metadata?.full_name||user?.email||'[NOMBRE DEL ALUMNO]',cid=certId();document.getElementById('main').innerHTML=`<div class="no-print"><div class="eyebrow">CERTIFICACIÓN</div><h1>Certificado SENTINEL Academy</h1><p class="muted">${ok?'Criterios cumplidos.':'Requisitos: 37/37 lecciones + examen ≥70 + Operación SENTINEL ≥70.'}</p><button class="btn primary" ${ok?'':'disabled'} onclick="print()">Imprimir / guardar como PDF</button></div><div class="certwrap"><div class="cert"><div class="ribbon">★<br><span style="font-size:10px">SENTINEL</span></div><div class="certLogo"><img src="sentinel-logo.png" alt="SENTINEL Academy"></div><h1>CERTIFICADO DE FINALIZACIÓN Y APROVECHAMIENTO</h1><div class="award">Se otorga a</div><div class="name">${esc(name)}</div><div style="position:absolute;top:275px;left:0;right:0;text-align:center">por haber completado satisfactoriamente el curso</div><div class="course">IA PARA INTELIGENCIA</div><div class="sub">FUNDAMENTOS, OSINT Y ANÁLISIS CON IA</div><div class="meta"><div>DURACIÓN<b>30–40 HORAS ESTIMADAS</b></div><div>FECHA DE EMISIÓN<b>${new Date().toLocaleDateString('es-ES')}</b></div><div>ESTÁNDARES DE CALIDAD<b>SENTINEL ACADEMY</b></div><div>VERIFICACIÓN<b>${cid}</b></div></div><div class="body">Este programa incluye 37 lecciones, formación práctica en análisis de inteligencia, OSINT, evaluación de fuentes, análisis estructurado, inteligencia asistida por IA, gestión de riesgos e Intelligence Brief.<br>El alumno ha completado asimismo la <b>Operación SENTINEL — Horizonte Norte</b> y superado los criterios de evaluación establecidos.</div><div class="sign sl">DIRECTOR ACADÉMICO<br><b>SENTINEL ACADEMY</b></div><div class="sign sr">COORDINADOR ACADÉMICO<br><b>SENTINEL ACADEMY</b></div><div class="seal">S</div><div class="footer"><span>VERIFICACIÓN · sentinelacademy.com/verificar</span><span>CERTIFICADO Nº <b>${cid}</b></span></div></div></div><p class="muted no-print">Certificado privado de formación y aprovechamiento. No constituye una titulación oficial, homologación ni habilitación profesional regulada.</p>`}
+function verify(){
+  document.getElementById("main").innerHTML=`<div class="eyebrow">VERIFICACIÓN</div><h1>Comprobar certificado</h1><div class="card"><input id="cv" class="field" placeholder="Ej.: SEN-2026-000184"><button class="btn primary" onclick="verifyId()">Verificar</button><div id="vs" class="status">La verificación pública se conectará al registro comercial de certificados.</div></div>`;
+}
+function verifyId(){document.getElementById("vs").textContent="El registro público de certificados se activará en la versión comercial."}
 
-function verify(){document.getElementById('main').innerHTML=`<div class="eyebrow">VERIFICACIÓN</div><h1>Comprueba un certificado</h1><div class="verify"><div class="card"><input id="cv" class="field" placeholder="Ej.: SEN-2026-000184"><button class="btn primary" onclick="verifyId()">Verificar</button><div id="vs" class="status">Introduce un identificador.</div></div><div class="card"><h2>Qué recibe el alumno</h2><ul><li>Nombre</li><li>Programa</li><li>Carga formativa</li><li>Resultado</li><li>ID único</li><li>Verificación</li></ul></div></div>`}
+function legal(){
+  document.getElementById("main").innerHTML=`<section class="legal"><h1>Aviso legal</h1><p><b>Titular:</b> [NOMBRE O DENOMINACIÓN SOCIAL]</p><p><b>NIF:</b> [NIF]</p><p><b>Domicilio:</b> [DOMICILIO A EFECTOS LEGALES]</p><p><b>Email:</b> [EMAIL LEGAL]</p></section>
+  <section class="legal"><h1>Política de privacidad</h1><p>Responsable: [NOMBRE O DENOMINACIÓN SOCIAL]. Finalidades: gestión de cuentas, acceso, progreso, evaluaciones, certificados y atención al usuario. Completar antes del lanzamiento con plazos de conservación, proveedores y transferencias aplicables.</p></section>
+  <section class="legal"><h1>Política de cookies</h1><p>Esta versión utiliza almacenamiento técnico para sesión. Si se incorporan cookies no exceptuadas, deberá existir información y consentimiento previo conforme a la normativa aplicable.</p></section>
+  <section class="legal"><h1>Condiciones de compra</h1><p>Producto: SENTINEL Academy — IA PARA INTELIGENCIA. Precio objetivo: 29,99 €. Acceso digital mediante cuenta personal tras confirmación del pago. Completar antes del lanzamiento con las condiciones legales definitivas.</p></section>`;
+}
 
-function verifyId(){let v=(document.getElementById('cv').value||'').trim().toUpperCase(),own=localStorage.getItem('sentinel_cert_'+(user?.id||'demo')),s=document.getElementById('vs');if(v&&v===own){s.className='status';s.innerHTML='<b>✓ Certificado válido en esta demo</b><br>SENTINEL Academy · IA para Inteligencia'}else{s.textContent='Identificador no encontrado en la demo. La versión comercial consultará Supabase.'}}
+function openAuth(mode="login"){
+  authMode=mode;document.getElementById("authTitle").textContent=mode==="signup"?"Crear cuenta":"Iniciar sesión";
+  document.getElementById("signupChecks").style.display=mode==="signup"?"block":"none";
+  document.getElementById("forgotBtn").style.display=mode==="signup"?"none":"block";
+  document.getElementById("auth").classList.add("show");document.getElementById("authMsg").textContent="";
+}
+function closeAuth(){document.getElementById("auth").classList.remove("show")}
+function toggleAuth(){openAuth(authMode==="login"?"signup":"login")}
 
-function legal(){document.getElementById('main').innerHTML=`<section class="legal"><h1>Aviso legal</h1><p><b>Titular:</b> [NOMBRE O DENOMINACIÓN SOCIAL]</p><p><b>NIF:</b> [NIF]</p><p><b>Domicilio:</b> [DOMICILIO A EFECTOS LEGALES]</p><p><b>Email:</b> [EMAIL LEGAL]</p><p>SENTINEL Academy es una iniciativa de formación privada especializada en IA, OSINT y análisis de inteligencia. El certificado es privado y no constituye titulación oficial, homologación ni habilitación profesional regulada.</p></section><section class="legal"><h1>Política de privacidad</h1><p>Responsable: [NOMBRE O DENOMINACIÓN SOCIAL]. Finalidades: gestión de cuentas, acceso, progreso, evaluaciones, certificados y atención al usuario. Proveedores: Supabase para autenticación/almacenamiento y proveedor de pago cuando se active el checkout. Derechos: acceso, rectificación, supresión, oposición, limitación y portabilidad mediante [EMAIL LEGAL]. Completar antes del lanzamiento con plazos de conservación y transferencias aplicables.</p></section><section class="legal"><h1>Política de cookies</h1><p>Esta versión utiliza almacenamiento técnico para sesión y progreso y no activa analítica publicitaria por defecto. Si se incorporan cookies no exceptuadas, deberá existir información y consentimiento previo.</p></section><section class="legal"><h1>Condiciones de compra</h1><p>Producto: SENTINEL Academy — IA PARA INTELIGENCIA. Precio objetivo: 29,99 €. Acceso digital mediante cuenta personal tras confirmación del pago. Antes del lanzamiento deberá configurarse el consentimiento expreso para iniciar la ejecución del contenido digital durante el periodo de desistimiento y el reconocimiento de sus efectos cuando legalmente proceda.</p></section>`}
+async function authSubmit(){
+  const email=document.getElementById("email").value.trim(),password=document.getElementById("password").value,msg=document.getElementById("authMsg");
+  if(!email||!password){msg.textContent="Introduce correo y contraseña.";return}
+  if(authMode==="signup"&&(!privacyOk.checked||!termsOk.checked)){msg.textContent="Debes aceptar privacidad y condiciones.";return}
+  try{
+    const r=authMode==="login"
+      ?await sb.auth.signInWithPassword({email,password})
+      :await sb.auth.signUp({email,password,options:{emailRedirectTo:window.location.origin+window.location.pathname}});
+    if(r.error)throw r.error;
+    msg.className="status ok";msg.textContent=authMode==="signup"&&!r.data.session?"Cuenta creada. Revisa tu correo si se requiere confirmación.":"Acceso correcto.";
+    if(r.data.session){user=r.data.user;closeAuth();await refresh()}
+  }catch(e){msg.className="status bad";msg.textContent=e.message||"No se pudo completar la operación."}
+}
 
-function purchase(){if(!user){openAuth('signup');return}alert('Checkout preparado. El pago real debe conectarse a un backend/Edge Function que cree y capture la orden y active el acceso tras confirmación del proveedor. PAYMENT_MODE='+PAYMENT_MODE)}
+async function openReset(){
+  closeAuth();
+  document.getElementById("resetMsg").textContent="";
+  const email=document.getElementById("email").value.trim();
+  if(email)document.getElementById("reset").dataset.email=email;
+  document.getElementById("reset").classList.add("show");
+  document.getElementById("reset").innerHTML=`<div class="modalbox">
+    <button class="btn" style="float:right" onclick="closeReset()">×</button>
+    <div class="eyebrow">RECUPERAR ACCESO</div><h2>Restablecer contraseña</h2>
+    <p class="muted">Introduce tu correo y te enviaremos un enlace seguro.</p>
+    <input id="resetEmail" class="field" type="email" value="${esc(email)}" placeholder="Correo electrónico">
+    <button class="btn primary" style="width:100%" onclick="sendReset()">Enviar enlace</button>
+    <div id="resetMsg" class="status"></div></div>`;
+}
+function closeReset(){document.getElementById("reset").classList.remove("show")}
+async function sendReset(){
+  const email=document.getElementById("resetEmail").value.trim(),msg=document.getElementById("resetMsg");
+  if(!email){msg.className="status bad";msg.textContent="Introduce tu correo.";return}
+  const redirectTo=window.location.origin+window.location.pathname;
+  const r=await sb.auth.resetPasswordForEmail(email,{redirectTo});
+  if(r.error){msg.className="status bad";msg.textContent=r.error.message;return}
+  msg.className="status ok";msg.textContent="Enlace enviado. Revisa tu correo y abre el enlace desde el mismo dispositivo.";
+}
 
-function openAuth(m){authMode=m;document.getElementById('authTitle').textContent=m==='signup'?'Crear cuenta':'Iniciar sesión';document.getElementById('auth').classList.add('show');document.getElementById('authMsg').textContent=''}function closeAuth(){document.getElementById('auth').classList.remove('show')}function toggleAuth(){openAuth(authMode==='login'?'signup':'login')}
+async function saveNewPassword(){
+  const p=document.getElementById("newPassword").value,p2=document.getElementById("newPassword2").value,msg=document.getElementById("resetMsg");
+  if(p.length<6){msg.className="status bad";msg.textContent="La contraseña debe tener al menos 6 caracteres.";return}
+  if(p!==p2){msg.className="status bad";msg.textContent="Las contraseñas no coinciden.";return}
+  const r=await sb.auth.updateUser({password:p});
+  if(r.error){msg.className="status bad";msg.textContent=r.error.message;return}
+  msg.className="status ok";msg.textContent="Contraseña actualizada correctamente. Ya puedes entrar.";
+  setTimeout(()=>{closeReset();openAuth("login")},1000);
+}
 
-async function authSubmit(){let email=document.getElementById('email').value.trim(),password=document.getElementById('password').value,msg=document.getElementById('authMsg');if(!email||!password){msg.textContent='Introduce correo y contraseña.';return}if(authMode==='signup'&&(!privacyOk.checked||!termsOk.checked)){msg.textContent='Debes aceptar privacidad y condiciones.';return}try{let r=authMode==='login'?await sb.auth.signInWithPassword({email,password}):await sb.auth.signUp({email,password});if(r.error)throw r.error;user=r.data.user||null;load();closeAuth();render()}catch(e){msg.textContent=e.message||'No se pudo completar la operación.'}}
+async function logout(){await sb.auth.signOut();user=null;lessonProgress=new Set();current="home";await refresh()}
+function acceptCookie(){localStorage.setItem("sentinel_cookie_notice","1");document.getElementById("cookie").classList.remove("show")}
 
-async function logout(){try{await sb.auth.signOut()}catch(e){}user=null;done=[];examPassed=false;missionScore=null;current='home';render()}function acceptCookie(){localStorage.setItem('sentinel_cookie_notice','1');cookie.classList.remove('show')}
+async function go(where){
+  current=where;side();
+  if(where==="home")return home();
+  if(where==="resources")return resources();
+  if(where==="exam")return exam();
+  if(where==="mission")return mission();
+  if(where==="certificate")return certificate();
+  if(where==="verify")return verify();
+  if(where==="legal")return legal();
+  if(where.startsWith("M"))return modulePage(where.slice(1));
+  if(where.startsWith("L"))return openLesson(where.slice(1));
+}
 
-function render(){account();side();if(current==='home')home();else if(current==='resources')resources();else if(current==='exam')examPage();else if(current==='mission')mission();else if(current==='certificate')certificate();else if(current==='verify')verify();else if(current==='legal')legal();else if(current.startsWith('M'))modulePage(current.slice(1));else lessonPage(current)}
+async function refresh(){
+  try{await loadData();await loadProgress()}catch(e){console.error(e)}
+  account();side();await home();
+}
 
-(async function(){try{let r=await sb.auth.getSession();user=r.data.session?.user||null}catch(e){}load();render();if(!localStorage.getItem('sentinel_cookie_notice'))cookie.classList.add('show');sb.auth.onAuthStateChange((_e,s)=>{user=s?.user||null;load();render()})})();
+sb.auth.onAuthStateChange(async(event,session)=>{
+  user=session?.user||null;
+  if(event==="PASSWORD_RECOVERY"){
+    document.getElementById("reset").classList.add("show");
+    document.getElementById("reset").innerHTML=`<div class="modalbox"><div class="eyebrow">RECUPERACIÓN SEGURA</div><h2>Nueva contraseña</h2><p class="muted">El enlace es válido. Elige una nueva contraseña.</p>
+    <input id="newPassword" class="field" type="password" placeholder="Nueva contraseña (mín. 6 caracteres)">
+    <input id="newPassword2" class="field" type="password" placeholder="Repite la contraseña">
+    <button class="btn primary" style="width:100%" onclick="saveNewPassword()">Actualizar contraseña</button>
+    <div id="resetMsg" class="status"></div></div>`;
+  }else{
+    await refresh();
+  }
+});
 
-</script></body></html>
-
+(async function(){
+  try{const r=await sb.auth.getSession();user=r.data.session?.user||null}catch(e){console.error(e)}
+  await refresh();
+  if(!localStorage.getItem("sentinel_cookie_notice"))document.getElementById("cookie").classList.add("show");
+})();
+</script>
+</body>
+</html>
