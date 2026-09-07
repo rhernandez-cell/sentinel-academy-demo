@@ -152,19 +152,26 @@ async function loadProgress(){
 async function loadEnrollment(){
   if(!user || !course) return null;
 
-  const r = await sb.rpc("get_my_enrollment", {
-    p_course_id: course.id
-  });
+  const { data, error } = await sb.rpc(
+    "get_my_enrollment",
+    { p_course_id: course.id }
+  );
 
-  if(r.error){
-    return {
-      __diagnosticError:
-        "ERROR RPC\n" +
-        "Código: " + (r.error.code || "-") + "\n" +
-        "Mensaje: " + (r.error.message || "-") + "\n" +
-        "Detalles: " + (r.error.details || "-")
-    };
-  }
+  document.getElementById("main").innerHTML = `
+    <div class="card">
+      <h2>DIAGNÓSTICO V11</h2>
+      <p><b>Usuario:</b> ${user?.id || "SIN USUARIO"}</p>
+      <p><b>Curso:</b> ${course?.id || "SIN CURSO"}</p>
+      <p><b>RPC data:</b></p>
+      <pre>${JSON.stringify(data,null,2)}</pre>
+      <p><b>RPC error:</b></p>
+      <pre>${JSON.stringify(error,null,2)}</pre>
+    </div>
+  `;
+
+  if(error) return {__diagnosticError:error};
+  return data && data.length ? data[0] : null;
+}
 
   if(!r.data || !r.data.length){
     const d = await sb.rpc("debug_my_enrollment", {
