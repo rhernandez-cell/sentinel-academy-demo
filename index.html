@@ -110,7 +110,7 @@ footer{padding:28px;text-align:center;color:#667b92;font-size:12px}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="https://xxtfozgfejjyxtgekcjp.supabase.co";
-const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh4dGZvemdmZWpqeXh0Z2VrY2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc2MzY4MTgsImV4cCI6MjEwMzIxMjgxOH0.mRvbnAhKdQumv_DY_Va0X4bAIJS1qwXjxGhSboYYTtw";
+const SUPABASE_KEY="sb_publishable_IVyT9ZAxmfmXmZKiP_eQ8Q_S4hQHKAS";
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
 let user=null, course=null, modules=[], lessons=[], current="home", currentLesson=null;
@@ -148,7 +148,12 @@ async function loadProgress(){
 async function loadEnrollment(){
   if(!user||!course)return null;
   const r=await sb.from("enrollments").select("*").eq("user_id",user.id).eq("course_id",course.id).maybeSingle();
-  return r.error?null:r.data;
+  if(r.error){
+    console.error("SENTINEL enrollment error",r.error);
+    const msg = `Error real de matrícula: ${r.error.message||"desconocido"}\nCódigo: ${r.error.code||"-"}\nDetalles: ${r.error.details||"-"}\nUsuario: ${user.id}\nCurso: ${course.id}`;
+    return {__diagnosticError:msg};
+  }
+  return r.data;
 }
 
 function account(){
@@ -192,6 +197,10 @@ async function home(){
 async function accessAcademy(){
   if(!user){openAuth("login");return}
   const enrolled=await loadEnrollment();
+  if(enrolled&&enrolled.__diagnosticError){
+    document.getElementById("main").innerHTML=`<div class="lessonbox"><div class="eyebrow">DIAGNÓSTICO</div><h1>Error de matrícula</h1><div class="status bad" style="white-space:pre-wrap">${esc(enrolled.__diagnosticError)}</div><p class="muted">Este mensaje es temporal y nos permite localizar el problema exacto.</p></div>`;
+    return;
+  }
   if(!enrolled){
     document.getElementById("main").innerHTML=`<div class="lessonbox"><div class="eyebrow">ACCESO</div><h1>Academia</h1><div class="status bad">No se ha encontrado una matrícula activa para esta cuenta.</div><p class="muted">Si acabas de crear o activar tu matrícula, vuelve a cargar la página.</p><button class="btn" style="margin-top:12px" onclick="refresh()">Actualizar</button></div>`;
     return;
