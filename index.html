@@ -148,24 +148,42 @@ async function loadProgress(){
 async function loadEnrollment(){
   if(!user || !course) return null;
 
-  const { data, error } = await sb.rpc(
-    "get_my_enrollment",
-    { p_course_id: course.id }
-  );
+  const r = await sb.rpc("get_my_enrollment", {
+    p_course_id: course.id
+  });
 
-  if(error){
-    console.error("SENTINEL enrollment RPC error", error);
-    const msg =
-      `Error real de matrícula: ${error.message || "desconocido"}\n` +
-      `Código: ${error.code || "-"}\n` +
-      `Detalles: ${error.details || "-"}\n` +
-      `Usuario: ${user.id}\n` +
-      `Curso: ${course.id}`;
-
-    return { __diagnosticError: msg };
+  if(r.error){
+    return {
+      __diagnosticError:
+        "ERROR RPC\n" +
+        "Código: " + (r.error.code || "-") + "\n" +
+        "Mensaje: " + (r.error.message || "-") + "\n" +
+        "Detalles: " + (r.error.details || "-")
+    };
   }
 
-  return data && data.length ? data[0] : null;
+  if(!r.data || !r.data.length){
+    const d = await sb.rpc("debug_my_enrollment", {
+      p_course_id: course.id
+    });
+
+    if(d.error){
+      return {
+        __diagnosticError:
+          "RPC SIN MATRÍCULA\n" +
+          "DEBUG ERROR: " + (d.error.message || "-") + "\n" +
+          "Código: " + (d.error.code || "-")
+      };
+    }
+
+    return {
+      __diagnosticError:
+        "DIAGNÓSTICO DE MATRÍCULA\n\n" +
+        JSON.stringify(d.data, null, 2)
+    };
+  }
+
+  return r.data[0];
 }
 function account(){
   const a=document.getElementById("account");
