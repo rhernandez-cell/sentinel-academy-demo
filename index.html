@@ -146,16 +146,27 @@ async function loadProgress(){
 }
 
 async function loadEnrollment(){
-  if(!user||!course)return null;
-  const r=await sb.from("enrollments").select("*").eq("user_id",user.id).eq("course_id",course.id).maybeSingle();
-  if(r.error){
-    console.error("SENTINEL enrollment error",r.error);
-    const msg = `Error real de matrícula: ${r.error.message||"desconocido"}\nCódigo: ${r.error.code||"-"}\nDetalles: ${r.error.details||"-"}\nUsuario: ${user.id}\nCurso: ${course.id}`;
-    return {__diagnosticError:msg};
-  }
-  return r.data;
-}
+  if(!user || !course) return null;
 
+  const { data, error } = await sb.rpc(
+    "get_my_enrollment",
+    { p_course_id: course.id }
+  );
+
+  if(error){
+    console.error("SENTINEL enrollment RPC error", error);
+    const msg =
+      `Error real de matrícula: ${error.message || "desconocido"}\n` +
+      `Código: ${error.code || "-"}\n` +
+      `Detalles: ${error.details || "-"}\n` +
+      `Usuario: ${user.id}\n` +
+      `Curso: ${course.id}`;
+
+    return { __diagnosticError: msg };
+  }
+
+  return data && data.length ? data[0] : null;
+}
 function account(){
   const a=document.getElementById("account");
   a.innerHTML=user
