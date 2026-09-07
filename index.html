@@ -234,7 +234,7 @@ async function home(){
   </div>`;
 }
 
-async function accessAcademy(){
+async function accessAcademy(){alert("V11: accessAcademy SE ESTÁ EJECUTANDO");
   if(!user){openAuth("login");return}
   const enrolled=await loadEnrollment();
   if(enrolled&&enrolled.__diagnosticError){
